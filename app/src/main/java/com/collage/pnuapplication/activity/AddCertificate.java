@@ -127,7 +127,7 @@ public class AddCertificate extends AppCompatActivity {
         selectImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PickImageDialog.build(new PickSetup().setCameraButtonText("كاميرا")
+                PickImageDialog.build(new PickSetup().setCameraButtonText(getString(R.string.camera))
                         .setGalleryButtonText("الصور").setCancelText("الغاء").setTitle("اختر"))
                         .setOnPickResult(new IPickResult() {
                             @Override
