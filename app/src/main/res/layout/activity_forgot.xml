@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr">
+
+    <!--<view-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#40000000"/>-->
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+        android:orientation="vertical">
+
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/parent_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/colorPrimary">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Forget Password"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/typeImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="16dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/login"
+                    android:visibility="gone" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+
+                    android:layout_marginTop="50dp"
+                    android:layout_marginRight="40dp">
+
+                    <EditText
+                        android:id="@+id/emailET"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/back_edittext"
+                        android:drawablePadding="10dp"
+                        android:gravity="left|center"
+                        android:hint="current password "
+
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="14sp" />
+
+                    <!--                        <ImageView-->
+                    <!--                            android:layout_width="20dp"-->
+                    <!--                            android:layout_height="20dp"-->
+                    <!--                            android:layout_gravity="left|center"-->
+                    <!--                            android:layout_marginLeft="10dp"-->
+                    <!--                            app:srcCompat="@drawable/account_outline" />-->
+                </FrameLayout>
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="40dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/back_edittext"
+                        android:drawablePadding="10dp"
+                        android:gravity="left|center"
+                        android:hint="choose password "
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="14sp" />
+
+                    <!--                        <ImageView-->
+                    <!--                            android:layout_width="16dp"-->
+                    <!--                            android:layout_height="16dp"-->
+                    <!--                            android:layout_gravity="left|center"-->
+                    <!--                            android:layout_marginLeft="10dp"-->
+                    <!--                            app:srcCompat="@drawable/lock_outline" />-->
+                    <!--                        <ImageView-->
+                    <!--                            android:id="@+id/showPass"-->
+                    <!--                            android:layout_width="16dp"-->
+                    <!--                            android:layout_height="16dp"-->
+                    <!--                            android:layout_gravity="right|center"-->
+                    <!--                            android:layout_marginRight="10dp"-->
+                    <!--                            app:srcCompat="@drawable/eye_outline" />-->
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="40dp">
+
+                    <EditText
+                        android:id="@+id/passET"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/back_edittext"
+                        android:drawablePadding="10dp"
+                        android:gravity="left|center"
+                        android:hint="repeat password "
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="14sp" />
+
+                    <!--                        <ImageView-->
+                    <!--                            android:layout_width="16dp"-->
+                    <!--                            android:layout_height="16dp"-->
+                    <!--                            android:layout_gravity="left|center"-->
+                    <!--                            android:layout_marginLeft="10dp"-->
+                    <!--                            app:srcCompat="@drawable/lock_outline" />-->
+                    <!--                        <ImageView-->
+                    <!--                            android:id="@+id/showPass"-->
+                    <!--                            android:layout_width="16dp"-->
+                    <!--                            android:layout_height="16dp"-->
+                    <!--                            android:layout_gravity="right|center"-->
+                    <!--                            android:layout_marginRight="10dp"-->
+                    <!--                            app:srcCompat="@drawable/eye_outline" />-->
+                </FrameLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="has at least 8 characters"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="has at least 1 number"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/signInBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@color/colorPrimary"
+                    android:onClick="settings"
+                    android:text="Update"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/changeBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="forgot your password ? press here"
+                    android:textSize="14sp"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="?android:colorAccent"
+        android:indeterminateTintMode="src_in"
+        android:visibility="gone" />
+
+
+</FrameLayout>
