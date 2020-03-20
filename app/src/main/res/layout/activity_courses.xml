@@ -31,7 +31,7 @@
 
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Courses and Events"
+                android:text="@string/Courses_and_Events"
                 android:textColor="#fff"
                 android:textSize="18sp"
                 android:textStyle="bold" />

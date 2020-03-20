@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PNU Application</string>
+    <string name="uplaude_certificate">قم برفع الشهادة واختيار التاريخ</string>
+    <string name="date">التاريخ</string>
+    <string name="Add">اضف</string>
+    <string name="Add_Course_or_event">أضف دورة أو حدث</string>
+    <string name="title">العنوان</string>
+    <string name="description">الوصف</string>
+    <string name="price">السعر</string>
+    <string name="location">الموقع</string>
+    <string name="number_of_seats">عدد المقاعد</string>
+    <string name="Credit_Hours">الساعات المعتمدة</string>
+    <string name="Calendar">التقويم</string>
+    <string name="Courses_certificates">شهادات الدورات</string>
+    <string name="Courses_and_Events">الدورات والفعاليات</string>
+    <string name="Change_Password">تغيير كلمة المرور</string>
+    <string name="current_password">كلمة المرور الحالية</string>
+    <string name="choose_password">إختر كلمة المرور </string>
+    <string name="repeat_password">اعد كلمة المرور </string>
+    <string name="has_at_least_8_characters">يحتوي على 8 أحرف على الأقل</string>
+    <string name="has_at_least_1_number">رقم واحد على الأقل</string>
+    <string name="Update">Update</string>
     <string name="login">تسجيل الدخول</string>
     <string name="email">البريد الالكتروني</string>
     <string name="password">كلمة المرور</string>
@@ -30,6 +50,21 @@
     <string name="open">فتح</string>
     <string name="close">غلق</string>
     <string name="home">الرئيسية</string>
-    <string name="language_setting">Language Settings</string>
+    <string name="language_setting">إعدادات اللغة</string>
+    <string name="Suggestion">الاقتراحات </string>
+    <string name="apointements">المواعيد </string>
+    <string name="Home">الصفحة الرئيسية </string>
+    <string name="timline">الخط الزمني</string>
+    <string name="skills_recod">السجل المهاري</string>
+    <string name="Certificate">الشهادات </string>
+    <string name="Result_of_Voting"> نتيجة التقييم</string>
+    <string name="Add_Suggest">اضافة اقتراح</string>
+    <string name="Vote_For_Clubs">تقييم النادى</string>
+    <string name="image">الصور</string>
+    <string name="Camera">كاميرا</string>
+    <string name="Cancel">الغاء</string>
+    <string name="Choose">اختر</string>
+    <string name="img_failed">حدث خطأ عند رفع الصوره</string>
+    <string name="success">تم الاضافة بنجاح</string>
 
 </resources>

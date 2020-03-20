@@ -138,8 +138,8 @@ public class AddCourse extends AppCompatActivity {
         selectImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PickImageDialog.build(new PickSetup().setCameraButtonText("كاميرا")
-                        .setGalleryButtonText("الصور").setCancelText("الغاء").setTitle("اختر"))
+                PickImageDialog.build(new PickSetup().setCameraButtonText(getString(R.string.Camera))
+                        .setGalleryButtonText(getString(R.string.image)).setCancelText(getString(R.string.Cancel)).setTitle(getString(R.string.Choose)))
                         .setOnPickResult(new IPickResult() {
                             @Override
                             public void onPickResult(PickResult pickResult) {
@@ -188,7 +188,7 @@ public class AddCourse extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
-                Toast.makeText(AddCourse.this, "حدث خطأ عند رفع الصوره ", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddCourse.this, getString(R.string.img_failed), Toast.LENGTH_LONG).show();
                 loading.setVisibility(View.GONE);
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -201,7 +201,7 @@ public class AddCourse extends AppCompatActivity {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(AddCourse.this, "حدث خطأ عند رفع الصوره ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AddCourse.this,  getString(R.string.img_failed), Toast.LENGTH_LONG).show();
                             loading.setVisibility(View.GONE);
                             throw task.getException();
 
@@ -220,7 +220,7 @@ public class AddCourse extends AppCompatActivity {
                         } else {
                             // Handle failures
                             // ...
-                            Toast.makeText(AddCourse.this, "حدث خطأ عند رفع الصوره ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AddCourse.this, getString(R.string.img_failed), Toast.LENGTH_LONG).show();
                             loading.setVisibility(View.GONE);
                         }
                     }

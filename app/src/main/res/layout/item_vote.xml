@@ -23,14 +23,14 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="dsadsa"
+            android:text="@string/title"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="dsadsa"/>
+            android:text="@string/description"/>
 
         <RatingBar
             android:id="@+id/rate"

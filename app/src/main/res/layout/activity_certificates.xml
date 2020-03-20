@@ -31,7 +31,7 @@
 
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Courses certificates"
+                android:text="@string/Courses_certificates"
                 android:textColor="#fff"
                 android:textSize="18sp"
                 android:textStyle="bold" />

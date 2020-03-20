@@ -39,7 +39,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
 
-                android:text="dsadsa" />
+                android:text="@string/title" />
 
         </LinearLayout>
     </LinearLayout>

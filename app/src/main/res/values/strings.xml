@@ -1,5 +1,25 @@
 <resources>
     <string name="app_name">PNU Application</string>
+    <string name="uplaude_certificate">Upload certificate and choose date</string>
+    <string name="date">date</string>
+    <string name="Add">Add</string>
+    <string name="Add_Course_or_event">Add Course or event</string>
+    <string name="title">title</string>
+    <string name="description">description</string>
+    <string name="price">price</string>
+    <string name="location">location</string>
+    <string name="number_of_seats">number of seats</string>
+    <string name="Credit_Hours">Credit Hours</string>
+    <string name="Calendar">Calendar</string>
+    <string name="Courses_certificates">Courses Certificates</string>
+    <string name="Courses_and_Events">Courses and Events</string>
+    <string name="Change_Password">Change Password</string>
+    <string name="current_password">current password</string>
+    <string name="choose_password">choose password</string>
+    <string name="repeat_password">repeat password</string>
+    <string name="has_at_least_8_characters">has at least 8 characters</string>
+    <string name="has_at_least_1_number">has at least 1 number</string>
+    <string name="Update">Update</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -29,5 +49,20 @@
     <string name="close">close</string>
     <string name="home">Home</string>
     <string name="language_setting">Language Settings</string>
+    <string name="Suggestion">Suggestions</string>
+    <string name="apointements">apointements</string>
+    <string name="Home">Home</string>
+    <string name="timline">TimeLine</string>
+    <string name="skills_recod">skills recod</string>
+    <string name="Certificate">Certificates</string>
+    <string name="Result_of_Voting">Result of Voting</string>
+    <string name="Add_Suggest">Add Suggest</string>
+    <string name="Vote_For_Clubs">Vote For Clubs</string>
+    <string name="image">Images</string>
+    <string name="Camera">Camera</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Choose">Choose</string>
+    <string name="img_failed">An error occurred when uploading the image</string>
+    <string name="success">Added successfully</string>
 
 </resources>

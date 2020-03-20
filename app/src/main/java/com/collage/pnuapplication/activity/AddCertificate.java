@@ -135,8 +135,8 @@ public class AddCertificate extends AppCompatActivity {
         selectImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PickImageDialog.build(new PickSetup().setCameraButtonText(getString(R.string.camera))
-                        .setGalleryButtonText("الصور").setCancelText("الغاء").setTitle("اختر"))
+                PickImageDialog.build(new PickSetup().setCameraButtonText(getString(R.string.Camera))
+                        .setGalleryButtonText(getString(R.string.image)).setCancelText(getString(R.string.Cancel)).setTitle(getString(R.string.Choose)))
                         .setOnPickResult(new IPickResult() {
                             @Override
                             public void onPickResult(PickResult pickResult) {
@@ -178,7 +178,7 @@ public class AddCertificate extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
-                Toast.makeText(AddCertificate.this, "حدث خطأ عند رفع الصوره ", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddCertificate.this, getString(R.string.img_failed), Toast.LENGTH_LONG).show();
                 loading.setVisibility(View.GONE);
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -191,7 +191,7 @@ public class AddCertificate extends AppCompatActivity {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(AddCertificate.this, "حدث خطأ عند رفع الصوره ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AddCertificate.this, getString(R.string.img_failed), Toast.LENGTH_LONG).show();
                             loading.setVisibility(View.GONE);
                             throw task.getException();
 
@@ -210,7 +210,7 @@ public class AddCertificate extends AppCompatActivity {
                         } else {
                             // Handle failures
                             // ...
-                            Toast.makeText(AddCertificate.this, "حدث خطأ عند رفع الصوره ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AddCertificate.this,  getString(R.string.img_failed), Toast.LENGTH_LONG).show();
                             loading.setVisibility(View.GONE);
                         }
                     }
@@ -238,7 +238,8 @@ public class AddCertificate extends AppCompatActivity {
 
 
 
-        Toast.makeText(AddCertificate.this,"تم الاضافة بنجاح",Toast.LENGTH_LONG).show();
+        Toast.makeText(AddCertificate.this,getString(R.string.success),Toast.LENGTH_LONG).show();
+
 
         finish();
         ref.child("Certificates")

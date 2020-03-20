@@ -30,7 +30,7 @@
 
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Add Course or event"
+                android:text="@string/Add_Course_or_event"
                 android:textColor="#fff"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -74,7 +74,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/button_bg"
-                    android:hint="title"
+                    android:hint="@string/title"
                     android:padding="10dp" />
 
 
@@ -86,7 +86,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/button_bg"
-                    android:hint="description"
+                    android:hint="@string/description"
                     android:padding="10dp" />
 
                 <EditText
@@ -99,7 +99,7 @@
                     android:background="@drawable/button_bg"
                     android:clickable="false"
                     android:focusable="false"
-                    android:hint="date"
+                    android:hint="@string/date"
                     android:padding="10dp" />
 
 
@@ -111,7 +111,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/button_bg"
-                    android:hint="price"
+                    android:hint="@string/price"
                     android:padding="10dp" />
 
                 <EditText
@@ -122,7 +122,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/button_bg"
-                    android:hint="location"
+                    android:hint="@string/location"
                     android:padding="10dp" />
 
                 <EditText
@@ -133,7 +133,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/button_bg"
-                    android:hint="number of seats"
+                    android:hint="@string/number_of_seats"
                     android:inputType="number"
                     android:padding="10dp" />
 
@@ -145,7 +145,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/button_bg"
-                    android:hint="Credit Hours"
+                    android:hint="@string/Credit_Hours"
                     android:inputType="number"
                     android:padding="10dp" />
 
@@ -160,7 +160,7 @@
                     android:layout_marginRight="40dp"
                     android:layout_marginBottom="100dp"
                     android:background="@color/colorPrimary"
-                    android:text="Add"
+                    android:text="@string/Add"
                     android:textAllCaps="false"
                     android:textColor="#fff"
                     android:textSize="16sp" />
