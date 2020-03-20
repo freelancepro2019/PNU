@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -103,6 +104,15 @@ public class HomeAdminSkillActivity extends AppCompatActivity  implements Naviga
         startActivity(intent);
     }
 
+    public void navigateToSkillViewProfileActivity(View view) {
+        Intent intent =new Intent(this,SkillRecordViewProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void navigateToSkillSendCertificateActivity(View view) {
+        Intent intent =new Intent(this,SendCertificateActivity.class);
+        startActivity(intent);
+    }
 
 
 

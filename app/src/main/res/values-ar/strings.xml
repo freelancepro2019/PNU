@@ -75,5 +75,9 @@
     <string name="select">حدد صورة</string>
     <string name="view_student_profile">الملف الشخصي للطالب</string>
     <string name="send_certificate">إرسال شهادة</string>
+    <string name="back">رجوع</string>
+    <string name="view_profile">عرض الملف الشخصي</string>
+    <string name="send">إرسال</string>
+    <string name="upload_certificate">تحميل الشهادة</string>
 
 </resources>

@@ -82,7 +82,7 @@
                 app:cardBackgroundColor="@color/grey"
                 app:elevation="3dp"
                 android:layout_margin="5dp"
-                android:onClick="Timeline"
+                android:onClick="navigateToSkillViewProfileActivity"
 
                 >
                 <LinearLayout
@@ -100,7 +100,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_user_student"
+                        android:src="@drawable/ic_user_student2"
                         />
                     <TextView
                         android:layout_width="wrap_content"
@@ -130,7 +130,8 @@
                 app:cardBackgroundColor="@color/grey"
                 app:elevation="3dp"
                 android:layout_margin="5dp"
-                android:onClick="Calendar"
+                android:onClick="navigateToSkillSendCertificateActivity"
+
 
 
                 >

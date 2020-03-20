@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.adapter.CertificateAdapter;
 import com.collage.pnuapplication.language.LanguageHelper;
-import com.collage.pnuapplication.model.CertificateModel;
+import com.collage.pnuapplication.model.AddCertificateModel;
+import com.collage.pnuapplication.model.UserModel;
+import com.collage.pnuapplication.preferences.Preferences;
 import com.collage.pnuapplication.tags.Tags;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -46,8 +48,10 @@ public class CertificateActivity extends AppCompatActivity {
     @BindView(R.id.addBtn)
     FloatingActionButton addBtn;
     private CertificateAdapter adapter;
-    private ArrayList<CertificateModel> data;
+    private ArrayList<AddCertificateModel> data;
     private DatabaseReference dRef;
+    private Preferences preferences;
+    private UserModel userModel;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -63,6 +67,8 @@ public class CertificateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_certificates);
         ButterKnife.bind(this);
+        preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(this);
         dRef = FirebaseDatabase.getInstance().getReference();
         setSupportActionBar(toolBar);
         getSupportActionBar().setTitle("");
@@ -84,14 +90,14 @@ public class CertificateActivity extends AppCompatActivity {
         loading.setVisibility(View.VISIBLE);
         data.clear();
         adapter.notifyDataSetChanged();
-        dRef.child(Tags.table_certificate).addValueEventListener(new ValueEventListener() {
+        dRef.child(Tags.table_certificate).child(userModel.getId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 loading.setVisibility(View.GONE);
                 if (dataSnapshot.getValue() != null) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                        CertificateModel model = ds.getValue(CertificateModel.class);
+                        AddCertificateModel model = ds.getValue(AddCertificateModel.class);
 
                         if (model!=null)
                         {

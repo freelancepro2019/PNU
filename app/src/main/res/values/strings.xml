@@ -73,5 +73,9 @@
     <string name="select">Select Image</string>
     <string name="view_student_profile">View student profile</string>
     <string name="send_certificate">Send Certificate</string>
+    <string name="back">Back</string>
+    <string name="view_profile">View Profile</string>
+    <string name="send">Send</string>
+    <string name="upload_certificate">Upload Certificate</string>
 
 </resources>
