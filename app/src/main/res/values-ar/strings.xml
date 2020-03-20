@@ -66,5 +66,12 @@
     <string name="Choose">اختر</string>
     <string name="img_failed">حدث خطأ عند رفع الصوره</string>
     <string name="success">تم الاضافة بنجاح</string>
+    <string name="no_courses">لا توجد كورسات لعرضها</string>
+    <string name="pls_fill">قم بملئ جميع البيانات</string>
+    <string name="no_certificates_to_show">لا توجد شهادات لعرضها</string>
+    <string name="appointments">مواعيد</string>
+    <string name="no_votes_to_show">لايوجد تصويت لعرضه</string>
+    <string name="ch_image">إختر الصورة</string>
+    <string name="select">حدد صورة</string>
 
 </resources>

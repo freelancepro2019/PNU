@@ -32,15 +32,22 @@
         <activity
             android:name=".activity.SuggestActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            android:parentActivityName=".activity.HomeStudentActivity"
+            />
         <activity
             android:name=".activity.VoteActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            android:parentActivityName=".activity.HomeStudentActivity"
+
+            />
         <activity
             android:name=".activity.CalendarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            android:parentActivityName=".activity.HomeStudentActivity"
+            />
         <activity
             android:name=".activity.CourseDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -55,10 +62,6 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".activity.TimeLineActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name=".activity.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
@@ -84,7 +87,10 @@
         <activity
             android:name=".activity.VoteResultActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            android:parentActivityName=".activity.HomeAdminActivity"
+
+            />
         <activity
             android:name=".activity.AddCertificate"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -92,7 +98,10 @@
         <activity
             android:name=".activity.CertificateActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            android:parentActivityName=".activity.HomeStudentActivity"
+
+            />
         <activity
             android:name=".activity.LoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

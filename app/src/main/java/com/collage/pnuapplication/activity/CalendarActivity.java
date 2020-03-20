@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,7 +16,9 @@ import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.adapter.CalenderAdapter;
 import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.model.ReserveModel;
-import com.collage.pnuapplication.utils.SharedPrefDueDate;
+import com.collage.pnuapplication.model.UserModel;
+import com.collage.pnuapplication.preferences.Preferences;
+import com.collage.pnuapplication.tags.Tags;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,22 +34,24 @@ import io.paperdb.Paper;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    @BindView(R.id.loading)
-    ProgressBar loading;
-    @BindView(R.id.recycle)
-    RecyclerView recyclerView;
-
-
-    CalenderAdapter adapter;
-    ArrayList<ReserveModel> data;
-
-
-    SharedPrefDueDate pref;
+    @BindView(R.id.progBar)
+    ProgressBar progBar;
+    @BindView(R.id.tvNoCourse)
+    TextView tvNoCourse;
+    @BindView(R.id.toolBar)
+    Toolbar toolBar;
+    @BindView(R.id.recView)
+    RecyclerView recView;
+    private CalenderAdapter adapter;
+    private List<ReserveModel> data;
+    private DatabaseReference dRef;
+    private Preferences preferences;
+    private UserModel userModel;
 
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang", "ar")));
     }
 
     @Override
@@ -52,19 +59,18 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         ButterKnife.bind(this);
-
-
-        pref = new SharedPrefDueDate(this);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         data = new ArrayList<>();
-
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-
-
-        recyclerView.setLayoutManager(layoutManager);
+        dRef = FirebaseDatabase.getInstance().getReference();
+        preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(this);
+        recView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CalenderAdapter(this, data);
+        recView.setAdapter(adapter);
 
-        recyclerView.setAdapter(adapter);
+        toolBar.setNavigationOnClickListener(view -> finish());
 
         getData();
 
@@ -74,38 +80,47 @@ public class CalendarActivity extends AppCompatActivity {
 
     private void getData() {
 
-        loading.setVisibility(View.VISIBLE);
-
         data.clear();
         adapter.notifyDataSetChanged();
-        DatabaseReference df = FirebaseDatabase.getInstance().getReference();
-        df.child("Reserve").addValueEventListener(new ValueEventListener() {
+        dRef.child(Tags.table_reserve).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        if (snapshot.exists()) {
-                            ReserveModel model = snapshot.getValue(ReserveModel.class);
+                if (dataSnapshot.getValue() != null) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                        ReserveModel model = ds.getValue(ReserveModel.class);
+
+                        if (model != null) {
 
 
-
-                            if (pref.getUserType()==0){
-                                if (model.getUserId().equals(pref.getUserId()))
+                            if (userModel.getType().equals(Tags.student)) {
+                                if (model.getUserId().equals(userModel.getId()))
+                                {
                                     data.add(model);
-                            }else {
+
+                                }
+                            } else {
                                 data.add(model);
                             }
 
 
+                            if (data.size() > 0) {
+                                adapter.notifyDataSetChanged();
+                                tvNoCourse.setVisibility(View.GONE);
+                            } else {
+                                tvNoCourse.setVisibility(View.VISIBLE);
 
-                            adapter.notifyDataSetChanged();
+                            }
                         }
+
+
                     }
-                    loading.setVisibility(View.GONE);
+                    progBar.setVisibility(View.GONE);
 
                 } else {
-                    loading.setVisibility(View.GONE);
+                    progBar.setVisibility(View.GONE);
+                    tvNoCourse.setVisibility(View.VISIBLE);
                 }
 
 
@@ -113,7 +128,7 @@ public class CalendarActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                loading.setVisibility(View.GONE);
+                progBar.setVisibility(View.GONE);
             }
         });
     }

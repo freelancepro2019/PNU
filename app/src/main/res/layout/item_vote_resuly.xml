@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="130dp"
-    android:gravity="center">
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_margin="5dp"
+    android:padding="5dp"
+    >
 
 
 
@@ -11,32 +14,43 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/logo"
-        android:layout_margin="20dp"/>
+
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center">
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+
+        >
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dsadsa"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:lines="1"
+            android:ellipsize="end"
+            />
 
         <TextView
             android:id="@+id/desc"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dsadsa"/>
+            android:lines="1"
+            android:ellipsize="end"
+            />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Rating Result"/>
+            android:layout_marginTop="8dp"
+            android:lines="1"
+            android:ellipsize="end"
+
+            />
 
 
 
@@ -44,8 +58,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -55,14 +68,16 @@
 
             <TextView
                 android:id="@+id/ratingTV"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:singleLine="true"
 
-                android:text="4.5"/>
+                />
 
         </LinearLayout>
 

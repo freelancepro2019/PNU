@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:layoutDirection="ltr">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
 
-    <!--<view-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="#40000000"/>-->
-
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/colorPrimary">
+            android:layout_height="wrap_content">
 
-            <TextView
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/Vote_For_Clubs"
-                android:textColor="#fff"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Vote_For_Clubs"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 
@@ -50,7 +48,19 @@
         android:indeterminate="true"
         android:indeterminateTint="?android:colorAccent"
         android:indeterminateTintMode="src_in"
-        android:visibility="gone" />
+
+        />
+
+    <TextView
+        android:id="@+id/tvNoVote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="@string/no_votes_to_show"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
 
 
 </FrameLayout>

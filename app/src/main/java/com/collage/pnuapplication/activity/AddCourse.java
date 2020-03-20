@@ -1,46 +1,51 @@
 package com.collage.pnuapplication.activity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
-import android.widget.DatePicker;
+import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
 import com.collage.pnuapplication.R;
+import com.collage.pnuapplication.databinding.DialogAddAddSelectImageBinding;
 import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.model.CourseModeel;
-import com.collage.pnuapplication.utils.SharedPrefDueDate;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.collage.pnuapplication.model.UserModel;
+import com.collage.pnuapplication.preferences.Preferences;
+import com.collage.pnuapplication.share.Common;
+import com.collage.pnuapplication.tags.Tags;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.vansuita.pickimage.bean.PickResult;
-import com.vansuita.pickimage.bundle.PickSetup;
-import com.vansuita.pickimage.dialog.PickImageDialog;
-import com.vansuita.pickimage.listeners.IPickResult;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Random;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,19 +72,20 @@ public class AddCourse extends AppCompatActivity {
     FrameLayout selectImageBtn;
     @BindView(R.id.image)
     ImageView image;
-    @BindView(R.id.loading)
-    ProgressBar loading;
 
 
-    Bitmap bitmap;
+    private final String camera_perm = Manifest.permission.CAMERA;
+    private final String read_perm = Manifest.permission.READ_EXTERNAL_STORAGE;
+    private final String write_perm = Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+    private final int read_req = 1;
+    private final int camera_req = 2;
+    private Uri uri = null;
+    private StorageReference sRef;
 
-    private StorageReference mStorageRef;
+    private Preferences preferences ;
+    private UserModel userModel;
 
-    SharedPrefDueDate pref;
-
-
-    String userId ;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -94,65 +100,178 @@ public class AddCourse extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(this);
+        sRef = FirebaseStorage.getInstance().getReference();
 
-        //init the storage
-        pref = new SharedPrefDueDate(this);
+        dateET.setOnClickListener(v -> {
 
-        userId = getIntent().getStringExtra("user");
-
-        mStorageRef = FirebaseStorage.getInstance().getReference();
-
-
-
-
-        dateET.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final Calendar myCalendar = Calendar.getInstance();
-                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                          int dayOfMonth) {
-                        myCalendar.set(Calendar.YEAR, year);
-                        myCalendar.set(Calendar.MONTH, monthOfYear);
-                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        String myFormat = "MM-dd-yyyy"; //In which you need put here
-                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                        dateET.setText(sdf.format(myCalendar.getTime()));
-                    }
-
-                };
-                new DatePickerDialog(AddCourse.this,date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            final Calendar myCalendar = Calendar.getInstance();
+            DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "dd-MMM-yyyy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                dateET.setText(sdf.format(myCalendar.getTime()));
+            };
+            new DatePickerDialog(AddCourse.this,date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
 
 
-            }
+        });
+
+        selectImageBtn.setOnClickListener(view -> {
+            createSelectImageDialog();
         });
 
 
+    }
 
-        selectImageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PickImageDialog.build(new PickSetup().setCameraButtonText(getString(R.string.Camera))
-                        .setGalleryButtonText(getString(R.string.image)).setCancelText(getString(R.string.Cancel)).setTitle(getString(R.string.Choose)))
-                        .setOnPickResult(new IPickResult() {
-                            @Override
-                            public void onPickResult(PickResult pickResult) {
+    private void createSelectImageDialog()
+    {
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .create();
 
-                                image.setImageBitmap(pickResult.getBitmap());
-                                bitmap = pickResult.getBitmap();
+        DialogAddAddSelectImageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_add_add_select_image, null, false);
 
-//                                uploadImage(pickResult.getBitmap());
 
-                            }
-                        }).show(getSupportFragmentManager());
-            }
+        binding.btnCancel.setOnClickListener(v ->dialog.dismiss());
+
+        binding.imageGallery.setOnClickListener(view -> {
+            dialog.dismiss();
+            checkReadPermission(read_req);
         });
+        binding.imageCamera.setOnClickListener(view ->{
+            dialog.dismiss();
+            checkCameraPermission();
+
+        } );
+
+
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
+    }
+
+    private void checkReadPermission(int req)
+    {
+        if (ContextCompat.checkSelfPermission(this,read_perm)!= PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this,new String[]{read_perm},req);
+        }else
+        {
+            selectImage(req);
+        }
+    }
+
+    private void checkCameraPermission()
+    {
+        if (ContextCompat.checkSelfPermission(this,camera_perm)!=PackageManager.PERMISSION_GRANTED
+                &&ContextCompat.checkSelfPermission(this,write_perm)!=PackageManager.PERMISSION_GRANTED
+        )
+        {
+            ActivityCompat.requestPermissions(this,new String[]{camera_perm,write_perm},camera_req);
+        }else
+        {
+            selectImage(camera_req);
+        }
+    }
+
+    private void selectImage(int req)
+    {
+
+        Intent intent = new Intent();
+
+        if (req == read_req)
+        {
+
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+                intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+            }else
+            {
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+
+            }
+            intent.setType("image/*");
+
+
+        }
+        else if (req == camera_req)
+        {
+            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        }
+
+        startActivityForResult(intent,req);
+
+
+    }
+
+    private Uri getUriFromBitmap(Bitmap bitmap)
+    {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,90,outputStream);
+        String uri = MediaStore.Images.Media.insertImage(getContentResolver(),bitmap,"","");
+        return Uri.parse(uri);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == camera_req)
+        {
+            if (grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED
+                    &&grantResults[1]==PackageManager.PERMISSION_GRANTED
+            )
+            {
+                selectImage(camera_req);
+
+            }else
+            {
+                Toast.makeText(this, "Permission to access image denied", Toast.LENGTH_SHORT).show();
+            }
+
+        }else if (requestCode ==read_req)
+        {
+            if (grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED
+
+            )
+            {
+                selectImage(read_req);
+
+            }else
+            {
+                Toast.makeText(this, "Permission to access image denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+         if (requestCode ==read_req&&resultCode== Activity.RESULT_OK&&data!=null)
+        {
+            uri = data.getData();
+
+            Picasso.get().load(uri).into(image);
+        }
+        else if (requestCode ==camera_req&&resultCode== Activity.RESULT_OK&&data!=null)
+        {
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            image.setImageBitmap(bitmap);
+            uri = getUriFromBitmap(bitmap);
+        }
 
     }
 
@@ -164,121 +283,83 @@ public class AddCourse extends AppCompatActivity {
         if (titleET.getText().toString().isEmpty() || descET.getText().toString().isEmpty() || dateET.getText().toString().isEmpty()
                 || priceET.getText().toString().isEmpty() || locationET.getText().toString().isEmpty()) {
 
-            Toast.makeText(this, "من فضلك قم بملئ جميع البيانات", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.pls_fill, Toast.LENGTH_LONG).show();
             return;
         }
 
 
-        if (bitmap == null) {
-            Toast.makeText(this, "من فضلك قم باختيار الصورة", Toast.LENGTH_LONG).show();
+        if (uri == null) {
+            Toast.makeText(this, R.string.ch_image, Toast.LENGTH_LONG).show();
             return;
         }
 
 
+        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        dialog.show();
 
 
-        loading.setVisibility(View.VISIBLE);
-        final StorageReference tripsRef = mStorageRef.child("Course/" + random() + ".png");
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] data = baos.toByteArray();
+        StorageReference ref = sRef.child("Course").child(UUID.randomUUID().toString()+ ".png");
+        ref.putFile(uri).addOnSuccessListener(taskSnapshot -> {
 
-        final UploadTask uploadTask = tripsRef.putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-                Toast.makeText(AddCourse.this, getString(R.string.img_failed), Toast.LENGTH_LONG).show();
-                loading.setVisibility(View.GONE);
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+            ref.getDownloadUrl().addOnSuccessListener(uri -> addCourse(dialog,uri.toString()));
 
-                //todo to get the downloaded url
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(AddCourse.this,  getString(R.string.img_failed), Toast.LENGTH_LONG).show();
-                            loading.setVisibility(View.GONE);
-                            throw task.getException();
-
-                        }
-
-                        // Continue with the task to get the download URL
-                        return tripsRef.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
-                            Log.d("google", "this is the downloaded url      " + downloadUri);
-                            addCourse(downloadUri + "");
-                        } else {
-                            // Handle failures
-                            // ...
-                            Toast.makeText(AddCourse.this, getString(R.string.img_failed), Toast.LENGTH_LONG).show();
-                            loading.setVisibility(View.GONE);
-                        }
-                    }
-                });
+        }).addOnFailureListener(e -> {
+            dialog.dismiss();
+            if (e.getMessage()!=null)
+            {
+                Log.e("error",e.getMessage());
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }else
+            {
+                Toast.makeText(this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
             }
         });
 
-
     }
 
 
-    private void addCourse(String image) {
+    private void addCourse(ProgressDialog dialog, String image) {
 
         CourseModeel model = new CourseModeel();
+        DatabaseReference dRef = FirebaseDatabase.getInstance().getReference();
 
+        String id = dRef.child(Tags.table_course).push().getKey();
 
-        model.setId(random());
+        model.setId(id);
         model.setTitle(titleET.getText().toString());
         model.setDesc(descET.getText().toString());
         model.setTime(dateET.getText().toString());
         model.setPrice(priceET.getText().toString());
         model.setLocation(locationET.getText().toString());
         model.setImage(image);
-        model.setUserId(userId);
+        model.setUserId(userModel.getId());
         model.setCreditHours(ceditET.getText().toString());
         model.setNumbers(Integer.parseInt(numberET.getText().toString()));
         model.setAvailable(Integer.parseInt(numberET.getText().toString()));
 
 
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
 
 
-        Toast.makeText(AddCourse.this,"تم الاضافة بنجاح",Toast.LENGTH_LONG).show();
 
-        finish();
-        ref.child("Course")
-                .child(model.getId()).setValue(model);
+        dRef.child(Tags.table_course).child(id).setValue(model)
+                .addOnSuccessListener(aVoid -> {
+                    dialog.dismiss();
+                    Toast.makeText(AddCourse.this,getString(R.string.success),Toast.LENGTH_LONG).show();
+                    finish();
+                }).addOnFailureListener(e -> {
+                    dialog.dismiss();
+                    if (e.getMessage()!=null)
+                    {
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
 
-
-    /**
-     * to get ids for the firebase
-     *
-     * @return random string
-     */
-    protected String random() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-        while (salt.length() < 18) {
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
-        }
-        return salt.toString();
-
-    }
 
 }

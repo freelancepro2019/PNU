@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:layoutDirection="ltr">
+    android:background="@color/white"
 
-    <!--<view-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="#40000000"/>-->
+    >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layoutDirection="ltr"
         android:orientation="vertical">
 
         <FrameLayout
@@ -87,7 +80,9 @@
                     android:layout_marginRight="20dp"
                     android:background="@drawable/button_bg"
                     android:hint="@string/description"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:gravity="top"
+                    />
 
                 <EditText
                     android:id="@+id/dateET"
@@ -112,7 +107,10 @@
                     android:layout_marginRight="20dp"
                     android:background="@drawable/button_bg"
                     android:hint="@string/price"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    />
 
                 <EditText
                     android:id="@+id/locationET"
@@ -135,7 +133,9 @@
                     android:background="@drawable/button_bg"
                     android:hint="@string/number_of_seats"
                     android:inputType="number"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    />
 
                 <EditText
                     android:id="@+id/ceditET"
@@ -147,7 +147,9 @@
                     android:background="@drawable/button_bg"
                     android:hint="@string/Credit_Hours"
                     android:inputType="number"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    />
 
 
                 <Button
@@ -155,15 +157,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginRight="40dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginBottom="100dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/rounded_primary"
                     android:text="@string/Add"
                     android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+
+                    />
 
 
             </LinearLayout>
@@ -173,15 +177,7 @@
     </LinearLayout>
 
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminate="true"
-        android:indeterminateTint="?android:colorAccent"
-        android:indeterminateTintMode="src_in"
-        android:visibility="gone" />
+
 
 
 </FrameLayout>

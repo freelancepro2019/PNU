@@ -2,7 +2,6 @@ package com.collage.pnuapplication.adapter;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.collage.pnuapplication.R;
-import com.collage.pnuapplication.activity.CourseDetailActivity;
-import com.collage.pnuapplication.model.CourseModeel;
 import com.collage.pnuapplication.model.ReserveModel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,10 +25,10 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
 
 
     private Context context;
-    ArrayList<ReserveModel> data;
+    private List<ReserveModel> data;
 
 
-    public CalenderAdapter(Context context, ArrayList<ReserveModel> data) {
+    public CalenderAdapter(Context context, List<ReserveModel> data) {
         this.context = context;
         this.data = data;
 

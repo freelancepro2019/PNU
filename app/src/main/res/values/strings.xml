@@ -64,5 +64,12 @@
     <string name="Choose">Choose</string>
     <string name="img_failed">An error occurred when uploading the image</string>
     <string name="success">Added successfully</string>
+    <string name="no_courses">No Courses To Show</string>
+    <string name="pls_fill">Please fill data</string>
+    <string name="no_certificates_to_show">No Certificates To Show</string>
+    <string name="appointments">Appointments</string>
+    <string name="no_votes_to_show">No Votes To Show</string>
+    <string name="ch_image">Choose image</string>
+    <string name="select">Select Image</string>
 
 </resources>

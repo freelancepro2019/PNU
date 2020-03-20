@@ -174,6 +174,7 @@
                 app:cardBackgroundColor="@color/grey"
                 app:elevation="3dp"
                 android:layout_margin="5dp"
+                android:onClick="Timeline"
 
                 >
                 <LinearLayout
@@ -197,7 +198,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        android:text="@string/timline"
+                        android:text="@string/courses_and_events"
                         android:layout_marginTop="5dp"
                         android:lines="1"
                         android:ellipsize="end"
@@ -247,7 +248,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        android:text="@string/calendar"
+                        android:text="@string/appointments"
                         android:layout_marginTop="5dp"
                         android:lines="1"
                         android:ellipsize="end"
@@ -280,6 +281,7 @@
                 app:cardBackgroundColor="@color/grey"
                 app:elevation="3dp"
                 android:layout_margin="5dp"
+                android:onClick="Calendar"
 
 
                 >
@@ -298,13 +300,13 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/worker"
+                        android:src="@drawable/calendar_multiple_check"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        android:text="@string/skills_recod"
+                        android:text="@string/calendar"
                         android:layout_marginTop="5dp"
                         android:lines="1"
                         android:ellipsize="end"
@@ -326,7 +328,6 @@
                 app:cardBackgroundColor="@color/grey"
                 app:elevation="3dp"
                 android:layout_margin="5dp"
-                android:onClick="certification"
 
 
                 >
@@ -353,7 +354,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        android:text="@string/Certificate"
+                        android:text="@string/attendance"
                         android:layout_marginTop="5dp"
                         android:lines="1"
                         android:ellipsize="end"
@@ -455,13 +456,13 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/suggestion"
+                        android:src="@drawable/ic_call"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        android:text="@string/Suggestion"
+                        android:text="@string/important_phone"
                         android:layout_marginTop="5dp"
                         android:lines="1"
                         android:ellipsize="end"

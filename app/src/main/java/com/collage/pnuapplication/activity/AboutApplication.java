@@ -1,7 +1,6 @@
 package com.collage.pnuapplication.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -28,6 +27,6 @@ public class AboutApplication extends AppCompatActivity {
     }
 
     public void Home(View view) {
-        startActivity(new Intent(AboutApplication.this,HomeActivity.class));
+        finish();
     }
 }

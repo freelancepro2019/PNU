@@ -1,22 +1,23 @@
 package com.collage.pnuapplication.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.model.SuggestModel;
-import com.collage.pnuapplication.utils.SharedPrefDueDate;
+import com.collage.pnuapplication.model.UserModel;
+import com.collage.pnuapplication.preferences.Preferences;
+import com.collage.pnuapplication.share.Common;
+import com.collage.pnuapplication.tags.Tags;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,29 +31,31 @@ public class SuggestActivity extends AppCompatActivity {
     EditText titleET;
     @BindView(R.id.descET)
     EditText descET;
-    @BindView(R.id.loading)
-    ProgressBar loading;
-
-
-    SharedPrefDueDate pref;
+    @BindView(R.id.toolBar)
+    Toolbar toolBar;
+    private Preferences preferences;
+    private UserModel userModel;
+    private DatabaseReference dRef;
 
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang", "ar")));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggest);
-
         ButterKnife.bind(this);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        dRef = FirebaseDatabase.getInstance().getReference();
+        preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(this);
 
-
-        //init the storage
-        pref = new SharedPrefDueDate(this);
-
+        toolBar.setNavigationOnClickListener(view -> finish());
 
     }
 
@@ -63,51 +66,43 @@ public class SuggestActivity extends AppCompatActivity {
 
         if (titleET.getText().toString().isEmpty() || descET.getText().toString().isEmpty()) {
 
-            Toast.makeText(this, "من فضلك قم بملئ جميع البيانات", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.pls_fill, Toast.LENGTH_LONG).show();
             return;
         }
 
-
-        loading.setVisibility(View.VISIBLE);
+        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         SuggestModel model = new SuggestModel();
 
 
-        model.setId(random());
+        String id = dRef.child(Tags.table_suggest).push().getKey();
+        model.setId(id);
         model.setTitle(titleET.getText().toString());
         model.setDesc(descET.getText().toString());
-        model.setUserId(pref.getUserId());
+        model.setUserId(userModel.getId());
         model.setTime(System.currentTimeMillis() + "");
 
 
-        Toast.makeText(SuggestActivity.this, "تم الارسال  بنجاح", Toast.LENGTH_LONG).show();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        dRef.child(Tags.table_suggest).child(model.getId()).setValue(model)
+                .addOnSuccessListener(aVoid -> {
+                    dialog.dismiss();
+                    Toast.makeText(SuggestActivity.this, getString(R.string.success), Toast.LENGTH_LONG).show();
+                    finish();
 
+                }).addOnFailureListener(e -> {
+                    dialog.dismiss();
+            if (e.getMessage() != null) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
-        ref.child("Suggest")
-                .child(model.getId()).setValue(model);
+            }
+        });
 
-
-        finish();
 
     }
 
-
-    /**
-     * to get ids for the firebase
-     *
-     * @return random string
-     */
-    protected String random() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-        while (salt.length() < 18) {
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
-        }
-        return salt.toString();
-
-    }
 
 }

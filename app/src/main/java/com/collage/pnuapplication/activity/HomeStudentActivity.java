@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -93,6 +94,26 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
         startActivity(new Intent(HomeStudentActivity.this, AboutApplication.class));
 
     }
+
+    public void Calendar(View view) {
+        startActivity(new Intent(this, CalendarActivity.class));
+    }
+
+    public void voteAction(View view) {
+        startActivity(new Intent(this, VoteActivity.class));
+    }
+
+    public void suggestAction(View view) {
+        startActivity(new Intent(this, SuggestActivity.class));
+
+
+    }
+
+
+    public void certification(View view) {
+        startActivity(new Intent(this, CertificateActivity.class));
+    }
+
     private  void createDialogAlert()
     {
         final AlertDialog dialog = new AlertDialog.Builder(this)

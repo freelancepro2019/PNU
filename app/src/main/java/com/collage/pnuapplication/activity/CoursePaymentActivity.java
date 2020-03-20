@@ -1,7 +1,6 @@
 package com.collage.pnuapplication.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -91,12 +90,7 @@ public class CoursePaymentActivity extends AppCompatActivity {
                 .child(model.getId()).setValue(model);
         Toast.makeText(CoursePaymentActivity.this, "تم الحجز بنجاح", Toast.LENGTH_LONG).show();
 
-
-
-
-        Intent i = new Intent(CoursePaymentActivity.this, HomeActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
+        finish();
 
     }
 

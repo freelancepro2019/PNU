@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,7 @@ import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.adapter.VoteAdapter;
 import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.model.ClubCollageModel;
+import com.collage.pnuapplication.tags.Tags;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,14 +33,15 @@ public class VoteActivity extends AppCompatActivity {
 
     @BindView(R.id.loading)
     ProgressBar loading;
+    @BindView(R.id.tvNoVote)
+    TextView tvNoVote;
+    @BindView(R.id.toolBar)
+    Toolbar toolBar;
     @BindView(R.id.recycle)
     RecyclerView recyclerView;
-
-
-
-    VoteAdapter adapter;
-    ArrayList<ClubCollageModel> data;
-
+    private VoteAdapter adapter;
+    private ArrayList<ClubCollageModel> data;
+    private DatabaseReference dRef;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -50,55 +54,67 @@ public class VoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
         ButterKnife.bind(this);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        initView();
 
 
+    }
 
+    private void initView() {
+        dRef = FirebaseDatabase.getInstance().getReference();
         data = new ArrayList<>();
-
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-
-
         recyclerView.setLayoutManager(layoutManager);
         adapter = new VoteAdapter(this, data);
-
         recyclerView.setAdapter(adapter);
-
+        toolBar.setNavigationOnClickListener(view -> finish());
         getData();
-
-
     }
 
 
     private void getData() {
 
-        loading.setVisibility(View.VISIBLE);
-
         data.clear();
         adapter.notifyDataSetChanged();
-        DatabaseReference df = FirebaseDatabase.getInstance().getReference();
-        df.child("ClubCollage").addValueEventListener(new ValueEventListener() {
+        dRef.child(Tags.table_club_collage).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists()) {
+                loading.setVisibility(View.GONE);
+
+                if (dataSnapshot.getValue()!=null) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        if (snapshot.exists()) {
-                            ClubCollageModel model = snapshot.getValue(ClubCollageModel.class);
 
+                        ClubCollageModel model = snapshot.getValue(ClubCollageModel.class);
 
+                        if (model!=null)
+                        {
                             if (model.getType().equals("2"))
                                 data.add(model);
 
-                            adapter.notifyDataSetChanged();
                         }
+
+
                     }
-                    loading.setVisibility(View.GONE);
+
+                    if (data.size()>0)
+                    {
+                        tvNoVote.setVisibility(View.GONE);
+                        adapter.notifyDataSetChanged();
+
+                    }else
+                    {
+                        tvNoVote.setVisibility(View.VISIBLE);
+
+                    }
 
                 } else {
+                    tvNoVote.setVisibility(View.VISIBLE);
                     loading.setVisibility(View.GONE);
                 }
-
 
             }
 

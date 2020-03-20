@@ -6,10 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.model.ClubCollageModel;
 import com.collage.pnuapplication.model.VoteModel;
-import com.collage.pnuapplication.utils.SharedPrefDueDate;
+import com.collage.pnuapplication.tags.Tags;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -37,12 +35,10 @@ public class VoteResultAdapter extends RecyclerView.Adapter<VoteResultAdapter.Vi
 
     private Context context;
     ArrayList<ClubCollageModel> data;
-    SharedPrefDueDate pref;
 
     public VoteResultAdapter(Context context, ArrayList<ClubCollageModel> data) {
         this.context = context;
         this.data = data;
-        pref = new SharedPrefDueDate(context);
 
     }
 
@@ -67,41 +63,6 @@ public class VoteResultAdapter extends RecyclerView.Adapter<VoteResultAdapter.Vi
 
 
         getData(holder,data.get(position).getId());
-
-
-//        holder.rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//            @Override
-//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-//
-//                VoteModel model = new VoteModel();
-//                model.setId(random());
-//                model.setClubId(data.get(position).getId());
-//                model.setUserId(pref.getUserId());
-//                model.setVoteValue(rating);
-//                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-//                ref.child("ClubVoting")
-//                        .child(model.getId()).setValue(model);
-//                Toast.makeText(context, "تم اضافة التقييم", Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent i = new Intent(context, CoursesActivity.class);
-//
-//                i.putExtra("data",data.get(position).getImage());
-//
-//                i.putExtra("user",data.get(position).getId());
-//
-//
-//
-//                context.startActivity(i);
-//            }
-//        });
-
-
     }
 
 
@@ -111,19 +72,22 @@ public class VoteResultAdapter extends RecyclerView.Adapter<VoteResultAdapter.Vi
 
         ArrayList<VoteModel> data =  new ArrayList<>();
         DatabaseReference df = FirebaseDatabase.getInstance().getReference();
-        df.child("ClubVoting").addValueEventListener(new ValueEventListener() {
+        df.child(Tags.table_club_voting).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        if (snapshot.exists()) {
-                            VoteModel model = snapshot.getValue(VoteModel.class);
+                if (dataSnapshot.getValue()!=null) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
+                        VoteModel model = ds.getValue(VoteModel.class);
+
+                        if (model!=null)
+                        {
                             if (model.getClubId().equals(userId)){
                                 data.add(model);
                             }
                         }
+
                     }
 
                     double totalVote = 0;
@@ -131,7 +95,9 @@ public class VoteResultAdapter extends RecyclerView.Adapter<VoteResultAdapter.Vi
                        totalVote +=  data.get(i).getVoteValue();
                     }
 
-                    holder.ratingTV.setText(""+(totalVote/(data.size()-1)));
+                    double r = (totalVote/(data.size()-1));
+                    String rate = String.format(Locale.ENGLISH,"%.2f",r);
+                    holder.ratingTV.setText(rate);
 
                 } else {
                 }

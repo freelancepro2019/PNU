@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 navigateToHomeActivity();
             }else if (userModel.getType().equals(Tags.admin))
             {
-
+                navigateToHomeAdminActivity();
             }
         }
 
@@ -169,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
                                     navigateToHomeActivity();
                                 }else if (userModel.getType().equals(Tags.admin))
                                 {
-
+                                    navigateToHomeAdminActivity();
                                 }
                             }
                         }else
@@ -183,6 +183,13 @@ public class LoginActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+    }
+
+    private void navigateToHomeAdminActivity() {
+
+        Intent intent = new Intent(this,HomeAdminActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void navigateToHomeActivity() {
