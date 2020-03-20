@@ -1,18 +1,18 @@
 package com.collage.pnuapplication.activity;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
-
 import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.adapter.CalenderAdapter;
-import com.collage.pnuapplication.adapter.CourseAdapter;
-import com.collage.pnuapplication.model.CourseModeel;
+import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.model.ReserveModel;
 import com.collage.pnuapplication.utils.SharedPrefDueDate;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -39,6 +40,12 @@ public class CalendarActivity extends AppCompatActivity {
 
 
     SharedPrefDueDate pref;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Paper.init(newBase);
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

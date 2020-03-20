@@ -1,6 +1,7 @@
 package com.collage.pnuapplication.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -14,6 +15,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.collage.pnuapplication.R;
+import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.utils.SharedPrefDueDate;
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,6 +23,7 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 public class HomeAdminActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,6 +41,12 @@ public class HomeAdminActivity extends AppCompatActivity  implements NavigationV
 
     private int mSelectedId;
 
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Paper.init(newBase);
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

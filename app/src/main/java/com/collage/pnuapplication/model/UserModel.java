@@ -1,11 +1,6 @@
 package com.collage.pnuapplication.model;
 
 public class UserModel {
-
-
-
-
-
     private String id = "";
     private String name = "";
     private String ssn = "";
@@ -16,9 +11,6 @@ public class UserModel {
     private String userName = "";
     private String password = "";
     private String barcode = "";
-
-
-    //1 for student 2 for the stuff 3 for admin
     private String type  = "";
 
 

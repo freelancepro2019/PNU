@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PNU Application</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="email_req">البريد الالكتروني مطلوب</string>
+    <string name="inv_email">البريد الالكتروني غير صحيح</string>
+    <string name="pass_req">كلمة المرور مطلوبة</string>
+    <string name="pass_to_short">كلمة المرور مطلوبة</string>
+    <string name="wait">إنتظر قليلا...</string>
+    <string name="em_pas_not_correct">البريد الالكتروني او كلمة المرور غير صحيحة</string>
+    <string name="failed">فشل</string>
+    <string name="user_not_found">المستخدم غير موجود</string>
+    <string name="about">عن التطبيق</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="change_language">تغيير اللغة</string>
+    <string name="change_password">تغيير كلمة المرور</string>
+    <string name="semester">الترم</string>
+    <string name="first_semester">الترم الاول</string>
+    <string name="community">تواصل إجتماعي</string>
+    <string name="collage">الكلية</string>
+    <string name="courses_and_events">كورسات واحداث</string>
+    <string name="announcements">إعلانات</string>
+    <string name="calendar">التقويم</string>
+    <string name="attendance">الحضور</string>
+    <string name="voting_results">نتائج التصويت</string>
+    <string name="important_phone">جوال مهم</string>
+
+    <string name="open">فتح</string>
+    <string name="close">غلق</string>
+    <string name="home">الرئيسية</string>
+    <string name="language_setting">Language Settings</string>
 
 </resources>

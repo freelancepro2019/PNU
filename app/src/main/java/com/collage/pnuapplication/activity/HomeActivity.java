@@ -1,47 +1,47 @@
 package com.collage.pnuapplication.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-
-import com.collage.pnuapplication.MainActivity;
 import com.collage.pnuapplication.R;
-import com.collage.pnuapplication.adapter.CalenderAdapter;
-import com.collage.pnuapplication.model.ClubCollageModel;
-import com.collage.pnuapplication.utils.SharedPrefDueDate;
+import com.collage.pnuapplication.language.LanguageHelper;
+import com.collage.pnuapplication.preferences.Preferences;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
-    SharedPrefDueDate pref;
-
-
-
     private NavigationView mDrawer;
     private DrawerLayout mDrawerLayout;
-
+    private Preferences preferences;
+    private FirebaseAuth mAuth;
     @BindView(R.id.menuIV)
     ImageView menuIV;
 
     private int mSelectedId;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Paper.init(newBase);
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,24 +49,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-
-        pref = new SharedPrefDueDate(this);
-
-        if (pref.getUserId() == null || pref.getUserId().isEmpty()) {
-            Intent i = new Intent(HomeActivity.this, LoginActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-
-
-
-        }
-
-        Log.d("google","this is the type    "+pref.getUserType());
-        if (pref.getUserType()!=0){
-            Intent i2 = new Intent(HomeActivity.this, HomeAdminActivity.class);
-            i2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i2);
-        }
         initViews();
 
     }
@@ -74,6 +56,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void initViews() {
+        mAuth = FirebaseAuth.getInstance();
         mDrawer = findViewById(R.id.nvView);
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -81,14 +64,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mDrawer.setNavigationItemSelectedListener(this);
 
 
-        menuIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mDrawerLayout.isDrawerVisible(GravityCompat.END)) {
-                    mDrawerLayout.closeDrawer(GravityCompat.END);
-                } else {
-                    mDrawerLayout.openDrawer(GravityCompat.END);
-                }
+        menuIV.setOnClickListener(view -> {
+            if (mDrawerLayout.isDrawerVisible(GravityCompat.END)) {
+                mDrawerLayout.closeDrawer(GravityCompat.END);
+            } else {
+                mDrawerLayout.openDrawer(GravityCompat.END);
             }
         });
 
@@ -102,21 +82,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (mSelectedId) {
 
             case R.id.about_lm:
-                mDrawerLayout.closeDrawer(GravityCompat.END);
+                mDrawerLayout.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(HomeActivity.this, AboutApplication.class));
                 break;
             case R.id.logout_lm:
-                mDrawerLayout.closeDrawer(GravityCompat.END);
-                pref.setUserId("");
-                pref.setUserType(0);
-                Intent i = new Intent(HomeActivity.this, LoginActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
+               logout();
                 break;
 
         }
 
 
+    }
+
+    private void logout() {
+
+        mAuth.signOut();
+        preferences.clear(this);
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**

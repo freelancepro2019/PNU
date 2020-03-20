@@ -1,5 +1,6 @@
 package com.collage.pnuapplication.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -10,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.collage.pnuapplication.R;
-import com.collage.pnuapplication.adapter.VoteAdapter;
 import com.collage.pnuapplication.adapter.VoteResultAdapter;
+import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.model.ClubCollageModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 public class VoteResultActivity extends AppCompatActivity {
 
@@ -35,6 +37,12 @@ public class VoteResultActivity extends AppCompatActivity {
 
     VoteResultAdapter adapter;
     ArrayList<ClubCollageModel> data;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Paper.init(newBase);
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+    }
 
 
     @Override

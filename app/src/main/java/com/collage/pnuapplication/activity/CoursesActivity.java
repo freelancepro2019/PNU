@@ -1,21 +1,21 @@
 package com.collage.pnuapplication.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.collage.pnuapplication.R;
-import com.collage.pnuapplication.adapter.CollageClubAdapter;
 import com.collage.pnuapplication.adapter.CourseAdapter;
-import com.collage.pnuapplication.model.ClubCollageModel;
+import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.model.CourseModeel;
 import com.collage.pnuapplication.utils.SharedPrefDueDate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 public class CoursesActivity extends AppCompatActivity {
 
@@ -55,6 +56,12 @@ public class CoursesActivity extends AppCompatActivity {
 
     SharedPrefDueDate pref;
 
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Paper.init(newBase);
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+    }
 
     @SuppressLint("RestrictedApi")
     @Override

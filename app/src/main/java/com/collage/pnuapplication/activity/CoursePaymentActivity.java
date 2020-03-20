@@ -1,18 +1,16 @@
 package com.collage.pnuapplication.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.collage.pnuapplication.R;
+import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.model.CourseModeel;
 import com.collage.pnuapplication.model.ReserveModel;
 import com.collage.pnuapplication.utils.SharedPrefDueDate;
@@ -24,6 +22,7 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.paperdb.Paper;
 
 public class CoursePaymentActivity extends AppCompatActivity {
 
@@ -34,6 +33,12 @@ public class CoursePaymentActivity extends AppCompatActivity {
 
     CourseModeel model;
     SharedPrefDueDate pref;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Paper.init(newBase);
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

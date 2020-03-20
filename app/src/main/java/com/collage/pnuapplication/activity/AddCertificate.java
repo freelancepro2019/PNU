@@ -1,6 +1,7 @@
 package com.collage.pnuapplication.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.collage.pnuapplication.R;
+import com.collage.pnuapplication.language.LanguageHelper;
 import com.collage.pnuapplication.model.CertificateModel;
-import com.collage.pnuapplication.model.CourseModeel;
 import com.collage.pnuapplication.utils.SharedPrefDueDate;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,6 +45,7 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.paperdb.Paper;
 
 public class AddCertificate extends AppCompatActivity {
 
@@ -71,6 +73,12 @@ public class AddCertificate extends AppCompatActivity {
 
 
     String courseId ;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Paper.init(newBase);
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

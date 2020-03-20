@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">PNU Application</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="email_req">Email Required</string>
+    <string name="inv_email">Invalid email</string>
+    <string name="pass_req">Password required</string>
+    <string name="pass_to_short">Password too short</string>
+    <string name="wait">Wait...</string>
+    <string name="em_pas_not_correct">Email or password not correct</string>
+    <string name="failed">Failed</string>
+    <string name="user_not_found">User not found</string>
+    <string name="about">About App</string>
+    <string name="logout">Logout</string>
+    <string name="change_language">Change Language</string>
+    <string name="change_password">Change Password</string>
+    <string name="semester">Semester</string>
+    <string name="first_semester">First semester</string>
+    <string name="community">Community</string>
+    <string name="collage">Collage</string>
+    <string name="courses_and_events">Courses and events</string>
+    <string name="announcements">Announcements</string>
+    <string name="calendar">Calendar</string>
+    <string name="attendance">Attendance</string>
+    <string name="voting_results">Voting Results</string>
+    <string name="important_phone">Important phone</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="home">Home</string>
+    <string name="language_setting">Language Settings</string>
+
 </resources>

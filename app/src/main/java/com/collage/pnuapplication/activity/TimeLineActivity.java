@@ -1,21 +1,23 @@
 package com.collage.pnuapplication.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.adapter.ViewPagerAdapter;
 import com.collage.pnuapplication.fragmennt.AllFragment;
 import com.collage.pnuapplication.fragmennt.ClubFragment;
 import com.collage.pnuapplication.fragmennt.CollageFragment;
-import com.collage.pnuapplication.fragmennt.DummyFragment;
+import com.collage.pnuapplication.language.LanguageHelper;
 import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 public class TimeLineActivity extends AppCompatActivity {
 
@@ -29,6 +31,12 @@ public class TimeLineActivity extends AppCompatActivity {
     TabLayout tabLayout;
 
 
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Paper.init(newBase);
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
