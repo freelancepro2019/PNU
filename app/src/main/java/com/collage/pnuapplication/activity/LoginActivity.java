@@ -67,6 +67,9 @@ public class LoginActivity extends AppCompatActivity {
             }else if (userModel.getType().equals(Tags.admin))
             {
                 navigateToHomeAdminActivity();
+            }else if (userModel.getType().equals(Tags.admin_skill))
+            {
+                navigateToHomeAdminSkillActivity();
             }
         }
 
@@ -170,6 +173,9 @@ public class LoginActivity extends AppCompatActivity {
                                 }else if (userModel.getType().equals(Tags.admin))
                                 {
                                     navigateToHomeAdminActivity();
+                                }else if (userModel.getType().equals(Tags.admin_skill))
+                                {
+                                    navigateToHomeAdminSkillActivity();
                                 }
                             }
                         }else
@@ -192,6 +198,12 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private void navigateToHomeAdminSkillActivity() {
+
+        Intent intent = new Intent(this,HomeAdminSkillActivity.class);
+        startActivity(intent);
+        finish();
+    }
     private void navigateToHomeActivity() {
 
         Intent intent = new Intent(this,HomeStudentActivity.class);

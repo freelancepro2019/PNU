@@ -7,6 +7,7 @@ public class Tags {
 
     public static final String student ="1";
     public static final String admin ="2";
+    public static final String admin_skill ="3";
 
 
     public static final String male ="1";

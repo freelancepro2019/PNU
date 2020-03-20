@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.paperdb.Paper;
 
-public class HomeStudentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeAdminSkillActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -39,9 +38,10 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
     @BindView(R.id.navView)
     NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
-    private FirebaseAuth mAuth;
     private Preferences preferences;
     private UserModel userModel;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -52,27 +52,30 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_student);
+        setContentView(R.layout.activity_home_admin_skill);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.home));
 
-        initView();
+        initViews();
+
     }
 
-    private void initView()
-    {
+
+
+    private void initViews() {
         Paper.init(this);
+        mAuth = FirebaseAuth.getInstance();
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
-        mAuth = FirebaseAuth.getInstance();
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         TextView tvName = navigationView.getHeaderView(0).findViewById(R.id.name);
         tvName.setText(userModel.getName());
-
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
@@ -81,7 +84,7 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
         switch (id)
         {
             case R.id.itemAbout:
-                navigateToAboutActivity();
+                navigateToAboutApplicationActivity();
                 break;
             case R.id.itemChangeLanguage:
                 createDialogAlert();
@@ -94,30 +97,14 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
         }
         return true;
     }
-    private void navigateToAboutActivity()
-    {
-        startActivity(new Intent(HomeStudentActivity.this, AboutApplication.class));
 
-    }
-
-    public void Calendar(View view) {
-        startActivity(new Intent(this, CalendarActivity.class));
-    }
-
-    public void voteAction(View view) {
-        startActivity(new Intent(this, VoteActivity.class));
-    }
-
-    public void suggestAction(View view) {
-        startActivity(new Intent(this, SuggestActivity.class));
-
-
+    private void navigateToAboutApplicationActivity() {
+        Intent intent =new Intent(this,AboutApplication.class);
+        startActivity(intent);
     }
 
 
-    public void certification(View view) {
-        startActivity(new Intent(this, CertificateActivity.class));
-    }
+
 
     private  void createDialogAlert()
     {
@@ -195,4 +182,5 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
             finish();
         }
     }
+
 }

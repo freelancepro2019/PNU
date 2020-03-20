@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -71,6 +72,8 @@ public class HomeAdminActivity extends AppCompatActivity  implements NavigationV
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        TextView tvName = navigationView.getHeaderView(0).findViewById(R.id.name);
+        tvName.setText(userModel.getName());
     }
 
 

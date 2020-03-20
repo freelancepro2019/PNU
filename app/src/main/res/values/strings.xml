@@ -71,5 +71,7 @@
     <string name="no_votes_to_show">No Votes To Show</string>
     <string name="ch_image">Choose image</string>
     <string name="select">Select Image</string>
+    <string name="view_student_profile">View student profile</string>
+    <string name="send_certificate">Send Certificate</string>
 
 </resources>

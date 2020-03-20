@@ -73,5 +73,7 @@
     <string name="no_votes_to_show">لايوجد تصويت لعرضه</string>
     <string name="ch_image">إختر الصورة</string>
     <string name="select">حدد صورة</string>
+    <string name="view_student_profile">الملف الشخصي للطالب</string>
+    <string name="send_certificate">إرسال شهادة</string>
 
 </resources>
