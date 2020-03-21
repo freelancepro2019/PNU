@@ -83,5 +83,8 @@
     <string name="reset_password">تغيير كلمة المرور</string>
     <string name="new_pas_req">كلمة المرور الجديدة مطلوبة</string>
     <string name="suc">تم بنجاح</string>
+    <string name="attend">حضر</string>
+    <string name="choose_certificate">إختر الشهادة</string>
+    <string name="upload">إرسال</string>
 
 </resources>
