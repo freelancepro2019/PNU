@@ -14,9 +14,9 @@
     <string name="Courses_certificates">Courses Certificates</string>
     <string name="Courses_and_Events">Courses and Events</string>
     <string name="Change_Password">Change Password</string>
-    <string name="current_password">current password</string>
+    <string name="current_password">Current Password</string>
     <string name="choose_password">choose password</string>
-    <string name="repeat_password">repeat password</string>
+    <string name="repeat_password">New Password</string>
     <string name="has_at_least_8_characters">has at least 8 characters</string>
     <string name="has_at_least_1_number">has at least 1 number</string>
     <string name="Update">Update</string>
@@ -77,5 +77,9 @@
     <string name="view_profile">View Profile</string>
     <string name="send">Send</string>
     <string name="upload_certificate">Upload Certificate</string>
+    <string name="no_attendance_to_show">No Attendance To Show</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="new_pas_req">New Password Required</string>
+    <string name="suc">Success</string>
 
 </resources>

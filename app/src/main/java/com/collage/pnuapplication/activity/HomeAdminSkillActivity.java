@@ -91,6 +91,7 @@ public class HomeAdminSkillActivity extends AppCompatActivity  implements Naviga
                 createDialogAlert();
                 break;
             case R.id.itemChangePassword:
+                navigateToChangePasswordActivity();
                 break;
             case R.id.itemLogout:
                 logout();
@@ -99,6 +100,11 @@ public class HomeAdminSkillActivity extends AppCompatActivity  implements Naviga
         return true;
     }
 
+    private void navigateToChangePasswordActivity() {
+
+        startActivity(new Intent(this, ChangePasswordActivity.class));
+
+    }
     private void navigateToAboutApplicationActivity() {
         Intent intent =new Intent(this,AboutApplication.class);
         startActivity(intent);

@@ -91,6 +91,7 @@ public class HomeAdminActivity extends AppCompatActivity  implements NavigationV
                 createDialogAlert();
                 break;
             case R.id.itemChangePassword:
+                navigateToChangePasswordActivity();
                 break;
             case R.id.itemLogout:
                 logout();
@@ -124,6 +125,16 @@ public class HomeAdminActivity extends AppCompatActivity  implements NavigationV
         //startActivity(new Intent(HomeAdminActivity.this, SuggestActivity.class));
     }
 
+    public void attendance(View view) {
+        startActivity(new Intent(HomeAdminActivity.this, AdminCoursesActivity.class));
+
+    }
+
+    private void navigateToChangePasswordActivity() {
+
+        startActivity(new Intent(this, ChangePasswordActivity.class));
+
+    }
 
     private  void createDialogAlert()
     {

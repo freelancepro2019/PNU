@@ -9,7 +9,7 @@ public class ReserveModel {
     private String time = "";
     private String courseId = "";
 
-    private CourseModeel course ;
+    private CourseModel course ;
 
 
     public ReserveModel() {
@@ -51,11 +51,11 @@ public class ReserveModel {
     }
 
 
-    public CourseModeel getCourse() {
+    public CourseModel getCourse() {
         return course;
     }
 
-    public void setCourse(CourseModeel course) {
+    public void setCourse(CourseModel course) {
         this.course = course;
     }
 }

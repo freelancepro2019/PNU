@@ -16,11 +16,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.SendCertificateActivity"
+        <activity android:name=".activity.StudentCoursesActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName=".activity.HomeAdminSkillActivity"
+            android:parentActivityName=".activity.HomeStudentActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
             />
+        <activity
+            android:name=".activity.AttendanceActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".activity.AdminCoursesActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.AdminCoursesActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".activity.HomeAdminActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.SendCertificateActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".activity.HomeAdminSkillActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".activity.SkillRecordViewProfileActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

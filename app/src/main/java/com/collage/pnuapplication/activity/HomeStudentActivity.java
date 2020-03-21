@@ -87,6 +87,7 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
                 createDialogAlert();
                 break;
             case R.id.itemChangePassword:
+                navigateToChangePasswordActivity();
                 break;
             case R.id.itemLogout:
                 logout();
@@ -94,15 +95,19 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
         }
         return true;
     }
+
+    private void navigateToChangePasswordActivity() {
+
+        startActivity(new Intent(HomeStudentActivity.this, ChangePasswordActivity.class));
+
+    }
+
     private void navigateToAboutActivity()
     {
         startActivity(new Intent(HomeStudentActivity.this, AboutApplication.class));
 
     }
 
-    public void Calendar(View view) {
-        startActivity(new Intent(this, CalendarActivity.class));
-    }
 
     public void voteAction(View view) {
         startActivity(new Intent(this, VoteActivity.class));
@@ -114,6 +119,9 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
 
     }
 
+    public void studentCourse(View view) {
+        startActivity(new Intent(this, StudentCoursesActivity.class));
+    }
 
     public void certification(View view) {
         startActivity(new Intent(this, CertificateActivity.class));

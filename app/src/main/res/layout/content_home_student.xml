@@ -220,7 +220,7 @@
                 app:cardBackgroundColor="@color/grey"
                 app:elevation="3dp"
                 android:layout_margin="5dp"
-                android:onClick="Calendar"
+                android:onClick="studentCourse"
 
 
                 >

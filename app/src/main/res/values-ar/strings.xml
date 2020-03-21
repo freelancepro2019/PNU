@@ -17,7 +17,7 @@
     <string name="Change_Password">تغيير كلمة المرور</string>
     <string name="current_password">كلمة المرور الحالية</string>
     <string name="choose_password">إختر كلمة المرور </string>
-    <string name="repeat_password">اعد كلمة المرور </string>
+    <string name="repeat_password">كلمة المرور الجديدة</string>
     <string name="has_at_least_8_characters">يحتوي على 8 أحرف على الأقل</string>
     <string name="has_at_least_1_number">رقم واحد على الأقل</string>
     <string name="Update">Update</string>
@@ -79,5 +79,9 @@
     <string name="view_profile">عرض الملف الشخصي</string>
     <string name="send">إرسال</string>
     <string name="upload_certificate">تحميل الشهادة</string>
+    <string name="no_attendance_to_show">لا يوجد طلاب لعرضهم</string>
+    <string name="reset_password">تغيير كلمة المرور</string>
+    <string name="new_pas_req">كلمة المرور الجديدة مطلوبة</string>
+    <string name="suc">تم بنجاح</string>
 
 </resources>

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.language.LanguageHelper;
-import com.collage.pnuapplication.model.CourseModeel;
+import com.collage.pnuapplication.model.CourseModel;
 import com.collage.pnuapplication.utils.SharedPrefDueDate;
 
 import java.util.Random;
@@ -55,7 +55,7 @@ public class CourseDetailActivity extends AppCompatActivity {
     ProgressBar loading;
 
 
-    CourseModeel model;
+    CourseModel model;
     SharedPrefDueDate pref;
 
     @Override
@@ -71,7 +71,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        model = (CourseModeel) getIntent().getSerializableExtra("data");
+        model = (CourseModel) getIntent().getSerializableExtra("data");
 
 
         pref = new SharedPrefDueDate(this);

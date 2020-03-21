@@ -30,7 +30,7 @@ import androidx.databinding.DataBindingUtil;
 import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.databinding.DialogAddAddSelectImageBinding;
 import com.collage.pnuapplication.language.LanguageHelper;
-import com.collage.pnuapplication.model.CourseModeel;
+import com.collage.pnuapplication.model.CourseModel;
 import com.collage.pnuapplication.model.UserModel;
 import com.collage.pnuapplication.preferences.Preferences;
 import com.collage.pnuapplication.share.Common;
@@ -321,7 +321,7 @@ public class AddCourse extends AppCompatActivity {
 
     private void addCourse(ProgressDialog dialog, String image) {
 
-        CourseModeel model = new CourseModeel();
+        CourseModel model = new CourseModel();
         DatabaseReference dRef = FirebaseDatabase.getInstance().getReference();
 
         String id = dRef.child(Tags.table_course).push().getKey();

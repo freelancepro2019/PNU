@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.collage.pnuapplication.R;
-import com.collage.pnuapplication.adapter.CalenderAdapter;
+import com.collage.pnuapplication.adapter.CourseAdapter3;
 import com.collage.pnuapplication.language.LanguageHelper;
-import com.collage.pnuapplication.model.ReserveModel;
+import com.collage.pnuapplication.model.CourseModel;
 import com.collage.pnuapplication.model.UserModel;
 import com.collage.pnuapplication.preferences.Preferences;
 import com.collage.pnuapplication.tags.Tags;
@@ -42,8 +42,8 @@ public class CalendarActivity extends AppCompatActivity {
     Toolbar toolBar;
     @BindView(R.id.recView)
     RecyclerView recView;
-    private CalenderAdapter adapter;
-    private List<ReserveModel> data;
+    private CourseAdapter3 adapter;
+    private List<CourseModel> data;
     private DatabaseReference dRef;
     private Preferences preferences;
     private UserModel userModel;
@@ -67,7 +67,7 @@ public class CalendarActivity extends AppCompatActivity {
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
         recView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CalenderAdapter(this, data);
+        adapter = new CourseAdapter3(this, data);
         recView.setAdapter(adapter);
 
         toolBar.setNavigationOnClickListener(view -> finish());
@@ -82,29 +82,22 @@ public class CalendarActivity extends AppCompatActivity {
 
         data.clear();
         adapter.notifyDataSetChanged();
-        dRef.child(Tags.table_reserve).addValueEventListener(new ValueEventListener() {
+        dRef.child(Tags.table_course).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.getValue() != null) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                        ReserveModel model = ds.getValue(ReserveModel.class);
+                        CourseModel model = ds.getValue(CourseModel.class);
 
                         if (model != null) {
 
-
-                            if (userModel.getType().equals(Tags.student)) {
-                                if (model.getUserId().equals(userModel.getId()))
-                                {
-                                    data.add(model);
-
-                                }
-                            } else {
+                            if (model.getUserId().equals(userModel.getId()))
+                            {
                                 data.add(model);
+
                             }
-
-
                             if (data.size() > 0) {
                                 adapter.notifyDataSetChanged();
                                 tvNoCourse.setVisibility(View.GONE);

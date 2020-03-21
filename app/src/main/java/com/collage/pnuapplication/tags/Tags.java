@@ -15,12 +15,12 @@ public class Tags {
 
     //database tables
     public static final String table_user ="User";
-    public static final String table_reserve ="Reserve";
     public static final String table_suggest ="Suggest";
     public static final String table_certificate ="Certificates";
     public static final String table_club_voting ="ClubVoting";
     public static final String table_club_collage ="ClubCollage";
     public static final String table_course ="Course";
+    public static final String table_attendance ="Attendance";
 
 
 

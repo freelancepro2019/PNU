@@ -15,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.activity.AddCertificate;
-import com.collage.pnuapplication.activity.AddCourse;
 import com.collage.pnuapplication.activity.CourseDetailActivity;
-import com.collage.pnuapplication.model.ClubCollageModel;
-import com.collage.pnuapplication.model.CourseModeel;
+import com.collage.pnuapplication.model.CourseModel;
 import com.collage.pnuapplication.utils.SharedPrefDueDate;
 
 import java.util.ArrayList;
@@ -31,12 +29,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
 
     private Context context;
-    ArrayList<CourseModeel> data;
+    ArrayList<CourseModel> data;
     String userImage;
 
     SharedPrefDueDate pref;
 
-    public CourseAdapter(Context context, ArrayList<CourseModeel> data, String userImage) {
+    public CourseAdapter(Context context, ArrayList<CourseModel> data, String userImage) {
         this.context = context;
         this.data = data;
 

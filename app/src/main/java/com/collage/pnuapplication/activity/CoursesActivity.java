@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.collage.pnuapplication.R;
 import com.collage.pnuapplication.adapter.CourseAdapter;
 import com.collage.pnuapplication.language.LanguageHelper;
-import com.collage.pnuapplication.model.CourseModeel;
+import com.collage.pnuapplication.model.CourseModel;
 import com.collage.pnuapplication.utils.SharedPrefDueDate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +45,7 @@ public class CoursesActivity extends AppCompatActivity {
 
 
     CourseAdapter adapter;
-    ArrayList<CourseModeel> data;
+    ArrayList<CourseModel> data;
 
 
     String userImage;
@@ -141,7 +141,7 @@ public class CoursesActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         if (snapshot.exists()) {
-                            CourseModeel model = snapshot.getValue(CourseModeel.class);
+                            CourseModel model = snapshot.getValue(CourseModel.class);
 
 
 //                            if (model.getUserId().equals(userId))

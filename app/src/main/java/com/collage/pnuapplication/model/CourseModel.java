@@ -2,7 +2,7 @@ package com.collage.pnuapplication.model;
 
 import java.io.Serializable;
 
-public class CourseModeel implements Serializable {
+public class CourseModel implements Serializable {
 
 
     private String id = "";
@@ -22,7 +22,7 @@ public class CourseModeel implements Serializable {
     private String creditHours = "";
 
 
-    public CourseModeel() {
+    public CourseModel() {
     }
 
 
