@@ -55,6 +55,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         dRef = FirebaseDatabase.getInstance().getReference();
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
+        binding.toolBar.setNavigationOnClickListener(view -> finish());
     }
 
     public void resetPassword(View view) {
