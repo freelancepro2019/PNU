@@ -27,6 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void About(View view) {
-        startActivity(new Intent(SettingsActivity.this,AboutApplication.class));
+        startActivity(new Intent(SettingsActivity.this, AboutApplication.class));
     }
 }

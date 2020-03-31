@@ -16,11 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.StudentCoursesActivity"
+        <activity android:name=".activity.SkillsRecordContentsActivity"></activity>
+        <activity android:name=".activity.AttachCoursesActivity" />
+        <activity android:name=".activity.SkillStudentActivity">
+
+        </activity>
+        <activity
+            android:name=".activity.StudentCoursesActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".activity.HomeStudentActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".activity.AttendanceActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

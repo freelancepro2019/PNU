@@ -10,6 +10,7 @@ public class CourseModel implements Serializable {
     private String title = "";
     private String desc  ="";
     private String image = "";
+    private String course_name;
 
 
     private int numbers = 0;
@@ -25,6 +26,13 @@ public class CourseModel implements Serializable {
     public CourseModel() {
     }
 
+    public String getCourse_name() {
+        return course_name;
+    }
+
+    public void setCourse_name(String course_name) {
+        this.course_name = course_name;
+    }
 
     public String getId() {
         return id;

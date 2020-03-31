@@ -120,13 +120,19 @@ public class HomeStudentActivity extends AppCompatActivity implements Navigation
     }
 
     public void studentCourse(View view) {
+
         startActivity(new Intent(this, StudentCoursesActivity.class));
     }
 
     public void certification(View view) {
         startActivity(new Intent(this, CertificateActivity.class));
     }
-
+    public void skillRecord(View view) {
+        startActivity(new Intent(this, SkillStudentActivity.class));
+    }
+    public void timeline(View view) {
+        startActivity(new Intent(this, TimeLineActivity.class));
+    }
     private  void createDialogAlert()
     {
         final AlertDialog dialog = new AlertDialog.Builder(this)

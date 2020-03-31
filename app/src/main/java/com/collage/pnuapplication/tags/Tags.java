@@ -21,6 +21,7 @@ public class Tags {
     public static final String table_club_collage ="ClubCollage";
     public static final String table_course ="Course";
     public static final String table_attendance ="Attendance";
+    public static final String table_about ="About";
 
 
 

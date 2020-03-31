@@ -53,7 +53,7 @@
     <string name="apointements">apointements</string>
     <string name="Home">Home</string>
     <string name="timline">TimeLine</string>
-    <string name="skills_recod">skills recod</string>
+    <string name="skills_recod">skills record</string>
     <string name="Certificate">Certificates</string>
     <string name="Result_of_Voting">Result of Voting</string>
     <string name="Add_Suggest">Add Suggest</string>
@@ -84,5 +84,14 @@
     <string name="attend">Attend</string>
     <string name="choose_certificate">Choose Certificate</string>
     <string name="upload">Upload</string>
+    <string name="skills_record_contents">skills record contents</string>
+    <string name="attach_courses_or_skills">Attach Courses Or Skills</string>
+    <string name="Hi_rahaf">You Must Acheive</string>
+    <string name="name_of_course">Name of the skill or course</string>
+    <string name="excuting_agency">The Excuting Agency</string>
+    <string name="from_date">From Date</string>
+    <string name="todate">To Date</string>
+    <string name="number_of_hours">The Number Of Hours</string>
+    <string name="submit">Submit</string>
 
 </resources>
