@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "499081760985",
+    "firebase_url": "https://pnu-app-682c4.firebaseio.com",
+    "project_id": "pnu-app-682c4",
+    "storage_bucket": "pnu-app-682c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499081760985:android:6fb6d1e78cefdabad26ec8",
+        "android_client_info": {
+          "package_name": "com.collage.pnuapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499081760985-ebfs1bmd1s3824fviucf61mhmkvn43ev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.collage.pnuapplication",
+            "certificate_hash": "238967f33c70fdf646b3dbc4f9e7dc3c5153b95c"
+          }
+        },
+        {
+          "client_id": "499081760985-fdo44qm6ofn5jcd0u0h4gja5fjnqoel3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwGkI7GpV3KyXx4MWDoE_Uy1gg26TVaGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499081760985-fdo44qm6ofn5jcd0u0h4gja5fjnqoel3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

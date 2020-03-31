@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6A6F89</color>
+    <color name="colorPrimaryDark">#FF4B4F61</color>
+    <color name="colorAccent">#CECE05</color>
+    <color name="grey">#f2f2f2</color>
+    <color name="black__meduim">#8F8E8E</color>
+    <color name="brown">#513726</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey1">#fafafa</color>
+    <color name="grey2">#f5f5f5</color>
+    <color name="grey3">#eeeeee</color>
+    <color name="grey4">#bababa</color>
+    <color name="grey5">#353535</color>
+
+    <color name="transparent">#00000000</color>
+
+
+    <color name="red_meduim">#610011</color>
+    <color name="red_light">#951C26</color>
+    <color name="color1">#C2185B</color>
+    <color name="color5">#6200EA</color>
+
+</resources>

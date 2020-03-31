@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="nkdroid.tutorial.navigationview.MainActivity">
+    <group android:checkableBehavior="single">
+
+
+        <!--<item-->
+            <!--android:id="@+id/item_navigation_dashboard"-->
+            <!--android:title=""/>-->
+
+        <item
+            android:id="@+id/about_lm"
+            android:title="about"
+            android:icon="@drawable/information_outline"/>
+
+
+        <item
+            android:id="@+id/logout_lm"
+            android:title="Logout"
+            android:icon="@drawable/logout"/>
+
+
+    </group>
+</menu>
