@@ -15,9 +15,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,7 +47,10 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -73,6 +80,9 @@ public class AddCourse extends AppCompatActivity {
     @BindView(R.id.image)
     ImageView image;
 
+    @BindView(R.id.spinner)
+    Spinner spinner;
+
 
     private final String camera_perm = Manifest.permission.CAMERA;
     private final String read_perm = Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -85,6 +95,8 @@ public class AddCourse extends AppCompatActivity {
 
     private Preferences preferences ;
     private UserModel userModel;
+    private List<String> categoryList;
+    private String category = "";
 
 
     @Override
@@ -97,12 +109,45 @@ public class AddCourse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
+        initView();
+
+
+
+    }
+
+    private void initView() {
+        categoryList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.course_category_array)));
 
         ButterKnife.bind(this);
-
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
         sRef = FirebaseStorage.getInstance().getReference();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,categoryList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i==0)
+                {
+                    category = "";
+                }else if (i==1)
+                {
+                    category = Tags.category_club;
+                }else if (i==2)
+                {
+                    category = Tags.category_collage;
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         dateET.setOnClickListener(v -> {
 
@@ -126,8 +171,6 @@ public class AddCourse extends AppCompatActivity {
         selectImageBtn.setOnClickListener(view -> {
             createSelectImageDialog();
         });
-
-
     }
 
     private void createSelectImageDialog()
@@ -281,7 +324,7 @@ public class AddCourse extends AppCompatActivity {
 
 
         if (titleET.getText().toString().isEmpty() || descET.getText().toString().isEmpty() || dateET.getText().toString().isEmpty()
-                || priceET.getText().toString().isEmpty() || locationET.getText().toString().isEmpty()) {
+                || priceET.getText().toString().isEmpty() || locationET.getText().toString().isEmpty()||category.isEmpty()) {
 
             Toast.makeText(this,R.string.pls_fill, Toast.LENGTH_LONG).show();
             return;
@@ -332,6 +375,7 @@ public class AddCourse extends AppCompatActivity {
         model.setTime(dateET.getText().toString());
         model.setPrice(priceET.getText().toString());
         model.setLocation(locationET.getText().toString());
+        model.setCourse_category(category);
         model.setImage(image);
         model.setUserId(userModel.getId());
         model.setCreditHours(ceditET.getText().toString());

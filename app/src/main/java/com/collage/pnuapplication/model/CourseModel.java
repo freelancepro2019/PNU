@@ -10,13 +10,10 @@ public class CourseModel implements Serializable {
     private String title = "";
     private String desc  ="";
     private String image = "";
-    private String course_name;
-
-
+    private String course_name="";
+    private String course_category="";
     private int numbers = 0;
     private int available  = 0;
-
-
     private String time = "";
     private String price = "";
     private String location = "";
@@ -121,5 +118,13 @@ public class CourseModel implements Serializable {
 
     public void setCreditHours(String creditHours) {
         this.creditHours = creditHours;
+    }
+
+    public String getCourse_category() {
+        return course_category;
+    }
+
+    public void setCourse_category(String course_category) {
+        this.course_category = course_category;
     }
 }

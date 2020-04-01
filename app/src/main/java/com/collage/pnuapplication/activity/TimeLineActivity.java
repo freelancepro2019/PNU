@@ -1,45 +1,24 @@
 package com.collage.pnuapplication.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.collage.pnuapplication.R;
-import com.collage.pnuapplication.adapter.StudentCourseAdapter;
-import com.collage.pnuapplication.adapter.TimeLineAdapter;
-import com.collage.pnuapplication.databinding.ActivityStudentCoursesBinding;
+import com.collage.pnuapplication.adapter.ViewPagerAdapter;
 import com.collage.pnuapplication.databinding.ActivityTimeLineBinding;
+import com.collage.pnuapplication.fragments.Fragment_All;
+import com.collage.pnuapplication.fragments.Fragment_Clubs;
+import com.collage.pnuapplication.fragments.Fragment_Collage;
 import com.collage.pnuapplication.language.LanguageHelper;
-import com.collage.pnuapplication.model.AttendanceModel;
-import com.collage.pnuapplication.model.AttendanceUser;
-import com.collage.pnuapplication.model.CourseModel;
-import com.collage.pnuapplication.model.UserModel;
-import com.collage.pnuapplication.preferences.Preferences;
-import com.collage.pnuapplication.tags.Tags;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.paperdb.Paper;
 
 public class TimeLineActivity extends AppCompatActivity {
     private ActivityTimeLineBinding binding;
-    private List<CourseModel> courseModelList;
-    private TimeLineAdapter adapter;
-    private DatabaseReference dRef;
-    private Preferences preferences;
-    private UserModel userModel;
+    private ViewPagerAdapter adapter;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -56,70 +35,16 @@ public class TimeLineActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        preferences = Preferences.newInstance();
-        userModel = preferences.getUserData(this);
-        dRef = FirebaseDatabase.getInstance().getReference();
-        courseModelList = new ArrayList<>();
-        adapter = new TimeLineAdapter(this,courseModelList);
-        binding.recView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recView.setAdapter(adapter);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(Fragment_All.newInstance(),getString(R.string.all));
+        adapter.addFragment(Fragment_Clubs.newInstance(),getString(R.string.clubs));
+        adapter.addFragment(Fragment_Collage.newInstance(),getString(R.string.collage));
 
-        getCourses();
+        binding.tab.setupWithViewPager(binding.pager);
+        binding.pager.setOffscreenPageLimit(adapter.getCount());
+        binding.pager.setAdapter(adapter);
     }
 
-    private void getCourses() {
 
-        dRef.child(Tags.table_course)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        binding.progBar.setVisibility(View.GONE);
-
-                        if (dataSnapshot.getValue()!=null)
-                        {
-                            for (DataSnapshot ds :dataSnapshot.getChildren())
-                            {
-                                CourseModel courseModel = ds.getValue(CourseModel.class);
-                                if (courseModel!=null)
-                                {
-                                    courseModelList.add(courseModel);
-                                }
-                            }
-
-                            if (courseModelList.size()>0)
-                            {
-                                adapter.notifyDataSetChanged();
-                                binding.tvNoCourse.setVisibility(View.GONE);
-
-                            }else
-                            {
-                                binding.tvNoCourse.setVisibility(View.VISIBLE);
-
-                            }
-                        }else
-                        {
-                            binding.tvNoCourse.setVisibility(View.VISIBLE);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-    }
-
-    private boolean isStudentJoinCourse(AttendanceModel model) {
-
-        for (AttendanceUser user :model.getUsers())
-        {
-            if (user.getId().equals(userModel.getId()))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 
 }

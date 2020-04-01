@@ -93,5 +93,13 @@
     <string name="todate">To Date</string>
     <string name="number_of_hours">The Number Of Hours</string>
     <string name="submit">Submit</string>
-
+    <string name="all">All</string>
+    <string name="clubs">Clubs</string>
+    <string name="join">Join</string>
+    <string name="user_reserved_course">User already reserved this course</string>
+    <string-array name="course_category_array">
+        <item>Category</item>
+        <item>Clubs</item>
+        <item>Collages</item>
+    </string-array>
 </resources>

@@ -1,4 +1,4 @@
-package com.collage.pnuapplication.fragmennt;
+package com.collage.pnuapplication.fragments;
 
 
 import android.os.Bundle;
@@ -29,7 +29,9 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClubFragment extends Fragment {
+public class CollageFragment extends Fragment {
+
+
 
 
     @BindView(R.id.loading)
@@ -38,8 +40,10 @@ public class ClubFragment extends Fragment {
     RecyclerView recyclerView;
 
 
-    CollageClubAdapter adapter;
-    ArrayList<ClubCollageModel> data;
+
+    CollageClubAdapter adapter ;
+    ArrayList<ClubCollageModel> data ;
+
 
 
     @Override
@@ -49,14 +53,16 @@ public class ClubFragment extends Fragment {
         View view = inflater.inflate(R.layout.frament_dummy, container, false);
         ButterKnife.bind(this, view);
 
+
         data = new ArrayList<>();
 
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+
 
 
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new CollageClubAdapter(getContext(), data);
+        adapter = new CollageClubAdapter(getContext(),data);
 
         recyclerView.setAdapter(adapter);
         getData();
@@ -81,8 +87,7 @@ public class ClubFragment extends Fragment {
                         if (snapshot.exists()) {
                             ClubCollageModel model = snapshot.getValue(ClubCollageModel.class);
 
-
-                            if (model.getType().equals("2"))
+                            if (model.getType().equals("1"))
                                 data.add(model);
 
                             adapter.notifyDataSetChanged();

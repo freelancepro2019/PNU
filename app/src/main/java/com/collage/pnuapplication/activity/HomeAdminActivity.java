@@ -114,7 +114,7 @@ public class HomeAdminActivity extends AppCompatActivity  implements NavigationV
     }
 
     public void Calendar(View view) {
-        startActivity(new Intent(HomeAdminActivity.this, CalendarActivity.class));
+        startActivity(new Intent(HomeAdminActivity.this, AdminCalenderActivity.class));
     }
 
     public void voteAction(View view) {

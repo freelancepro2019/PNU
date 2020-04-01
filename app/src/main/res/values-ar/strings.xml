@@ -95,5 +95,14 @@
     <string name="todate">الى تاريخ</string>
     <string name="number_of_hours">عدد الساعات</string>
     <string name="submit">ارسال</string>
+    <string name="all">الكل</string>
+    <string name="clubs">الاندية</string>
+    <string name="join">إشترك</string>
+    <string name="user_reserved_course">تم حجز هذا الكورس من قبل</string>
 
+    <string-array name="course_category_array">
+        <item>التصنيف</item>
+        <item>الاندية</item>
+        <item>الكليات</item>
+    </string-array>
 </resources>
