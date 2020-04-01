@@ -102,6 +102,10 @@
     <string name="clubs">الاندية</string>
     <string name="join">إشترك</string>
     <string name="user_reserved_course">تم حجز هذا الكورس من قبل</string>
+    <string name="details">تفاصيل</string>
+    <string name="available">متاح</string>
+    <string name="sar">ر.س</string>
+    <string name="no_details">لا توجد تفاصيل لعرضها</string>
 
     <string-array name="course_category_array">
         <item>التصنيف</item>

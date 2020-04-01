@@ -7,8 +7,8 @@
     <string name="title">title</string>
     <string name="description">description</string>
     <string name="price">price</string>
-    <string name="location">location</string>
-    <string name="number_of_seats">number of seats</string>
+    <string name="location">Location</string>
+    <string name="number_of_seats">Number of seats</string>
     <string name="Credit_Hours">Credit Hours</string>
     <string name="Calendar">Calendar</string>
     <string name="Courses_certificates">Courses Certificates</string>
@@ -101,6 +101,10 @@
     <string name="clubs">Clubs</string>
     <string name="join">Join</string>
     <string name="user_reserved_course">User already reserved this course</string>
+    <string name="details">Details</string>
+    <string name="available">Available</string>
+    <string name="sar">SAR</string>
+    <string name="no_details">No details to show</string>
     <string-array name="course_category_array">
         <item>Category</item>
         <item>Clubs</item>

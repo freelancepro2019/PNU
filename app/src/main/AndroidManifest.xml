@@ -16,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.CourseDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            />
+
         <activity
             android:name=".activity.ProfileActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -32,7 +37,12 @@
             android:name=".activity.AdminCalenderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".activity.AttachCoursesActivity" />
+
+        <activity android:name=".activity.AttachCoursesActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            />
+
         <activity
             android:name=".activity.SkillStudentActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

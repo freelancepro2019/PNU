@@ -1,11 +1,10 @@
 package com.collage.pnuapplication.fragments;
 
-import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,15 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.collage.pnuapplication.R;
+import com.collage.pnuapplication.activity.CourseDetailsActivity;
 import com.collage.pnuapplication.activity.TimeLineActivity;
 import com.collage.pnuapplication.adapter.TimeLineAdapter;
 import com.collage.pnuapplication.databinding.FragmentAllBinding;
-import com.collage.pnuapplication.model.AttendanceModel;
-import com.collage.pnuapplication.model.AttendanceUser;
 import com.collage.pnuapplication.model.CourseModel;
-import com.collage.pnuapplication.model.UserModel;
-import com.collage.pnuapplication.preferences.Preferences;
-import com.collage.pnuapplication.share.Common;
 import com.collage.pnuapplication.tags.Tags;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,8 +34,7 @@ public class Fragment_Clubs extends Fragment {
     private List<CourseModel> courseModelList;
     private TimeLineAdapter adapter;
     private DatabaseReference dRef;
-    private Preferences preferences;
-    private UserModel userModel;
+
 
     public static Fragment_Clubs newInstance()
     {
@@ -56,8 +50,6 @@ public class Fragment_Clubs extends Fragment {
 
     private void initView() {
         activity = (TimeLineActivity) getActivity();
-        preferences = Preferences.newInstance();
-        userModel = preferences.getUserData(activity);
         dRef = FirebaseDatabase.getInstance().getReference();
         courseModelList = new ArrayList<>();
 
@@ -119,115 +111,11 @@ public class Fragment_Clubs extends Fragment {
 
 
     public void setItemData(CourseModel courseModel) {
-        ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
-        dRef.child(Tags.table_attendance)
-                .child(courseModel.getId())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        if (dataSnapshot.getValue()==null)
-                        {
-                            reserveCourse(courseModel,dialog);
-                        }else
-                        {
-                            AttendanceModel attendanceModel = dataSnapshot.getValue(AttendanceModel.class);
-                            if (attendanceModel!=null)
-                            {
-                                if (attendanceModel.getUsers()!=null&&attendanceModel.getUsers().size()>0)
-                                {
-                                    if (isUserReserved(attendanceModel.getUsers(),userModel.getId()))
-                                    {
-                                        dialog.dismiss();
-                                        Toast.makeText(activity, R.string.user_reserved_course, Toast.LENGTH_SHORT).show();
-                                    }else
-                                    {
-                                        AttendanceUser attendanceUser = new AttendanceUser(userModel.getId(),userModel.getName(),userModel.getMail());
-                                        attendanceModel.getUsers().add(attendanceUser);
-                                        updateReserveCourse(attendanceModel,dialog);
-                                    }
-                                }else
-                                {
-
-                                    AttendanceUser attendanceUser = new AttendanceUser(userModel.getId(),userModel.getName(),userModel.getMail());
-                                    List<AttendanceUser> users = new ArrayList<>();
-                                    users.add(attendanceUser);
-                                    attendanceModel.setUsers(users);
-                                    updateReserveCourse(attendanceModel,dialog);
-
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+        Intent intent = new Intent(activity, CourseDetailsActivity.class);
+        intent.putExtra("data",courseModel);
+        startActivity(intent);
 
     }
 
-    private void reserveCourse(CourseModel courseModel,ProgressDialog dialog) {
-        AttendanceUser attendanceUser = new AttendanceUser(userModel.getId(),userModel.getName(),userModel.getMail());
-        List<AttendanceUser> users = new ArrayList<>();
-        users.add(attendanceUser);
-        AttendanceModel model = new AttendanceModel(courseModel.getId(),courseModel.getTitle(),courseModel.getImage(),users);
-        dRef.child(Tags.table_attendance)
-                .child(courseModel.getId())
-                .setValue(model)
-                .addOnSuccessListener(aVoid -> {
-                    dialog.dismiss();
-                    activity.finish();
 
-                }).addOnFailureListener(e -> {
-            dialog.dismiss();
-            if (e.getMessage()!=null)
-            {
-                Toast.makeText(activity,e.getMessage(), Toast.LENGTH_SHORT).show();
-            }else
-            {
-                Toast.makeText(activity,getString(R.string.failed), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
-
-    private void updateReserveCourse(AttendanceModel attendanceModel,ProgressDialog dialog) {
-        dRef.child(Tags.table_attendance)
-                .child(attendanceModel.getCourse_id())
-                .setValue(attendanceModel)
-                .addOnSuccessListener(aVoid -> {
-                    dialog.dismiss();
-                    activity.finish();
-
-                }).addOnFailureListener(e -> {
-            dialog.dismiss();
-            if (e.getMessage()!=null)
-            {
-                Toast.makeText(activity,e.getMessage(), Toast.LENGTH_SHORT).show();
-            }else
-            {
-                Toast.makeText(activity,getString(R.string.failed), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
-
-    private boolean isUserReserved(List<AttendanceUser> attendanceUserList,String user_id)
-    {
-        for (AttendanceUser user :attendanceUserList)
-        {
-            if (user.getId().equals(user_id))
-            {
-                return true;
-            }
-
-
-        }
-
-        return false;
-    }
 }
