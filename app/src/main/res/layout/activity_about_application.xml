@@ -6,9 +6,7 @@
         <variable
             name="lang"
             type="String" />
-        <variable
-            name="title"
-            type="String" />
+
         <variable
             name="content"
             type="String" />

@@ -12,10 +12,7 @@ public class UserModel {
     private String password = "";
     private String barcode = "";
     private String type  = "";
-
-
-
-
+    
     public UserModel(String id, String name, String ssn, String dob, String mail, String phone, String gender, String userName, String password, String barcode, String type) {
         this.id = id;
         this.name = name;

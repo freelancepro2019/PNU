@@ -46,7 +46,7 @@ public class AboutApplication extends AppCompatActivity {
 
 
     private void initView() {
-        dRef = FirebaseDatabase.getInstance().getReference().child(Tags.table_about);
+        dRef = FirebaseDatabase.getInstance().getReference();
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
@@ -59,10 +59,10 @@ public class AboutApplication extends AppCompatActivity {
         DatabaseReference databaseReference;
 
         if (lang.equals("ar")) {
-            databaseReference = dRef.child(Tags.table_about).child("ar_about");
+            databaseReference = dRef.child(Tags.table_setting).child(Tags.table_about).child("ar_about");
 
         } else {
-            databaseReference = dRef.child(Tags.table_about).child("en_about");
+            databaseReference = dRef.child(Tags.table_setting).child(Tags.table_about).child("en_about");
 
         }
 

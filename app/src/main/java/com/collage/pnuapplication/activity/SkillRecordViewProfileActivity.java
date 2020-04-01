@@ -2,6 +2,7 @@ package com.collage.pnuapplication.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.EditText;
@@ -153,6 +154,11 @@ public class SkillRecordViewProfileActivity extends AppCompatActivity {
                             if (userModel!=null)
                             {
 
+                                Intent intent=new Intent(SkillRecordViewProfileActivity.this,ProfileActivity.class);
+                                intent.putExtra("name",userModel.getName());
+                                intent.putExtra("email",userModel.getMail());
+                                intent.putExtra("phone",userModel.getPhone());
+                                startActivity(intent);
                             }
 
 

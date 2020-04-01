@@ -95,6 +95,9 @@
     <string name="todate">الى تاريخ</string>
     <string name="number_of_hours">عدد الساعات</string>
     <string name="submit">ارسال</string>
+    <string name="no_suggestions">لا يوجد تعليقات</string>
+    <string name="name">الاسم</string>
+    <string name="phone">رقم الجوال</string>
     <string name="all">الكل</string>
     <string name="clubs">الاندية</string>
     <string name="join">إشترك</string>

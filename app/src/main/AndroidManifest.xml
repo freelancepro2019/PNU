@@ -16,16 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.AdminCalenderActivity"
+        <activity
+            android:name=".activity.ProfileActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            />
-        <activity android:name=".activity.SkillsRecordContentsActivity" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.SuggesionsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.SkillsRecordContentsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.AdminCalenderActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name=".activity.AttachCoursesActivity" />
-        <activity android:name=".activity.SkillStudentActivity"
+        <activity
+            android:name=".activity.SkillStudentActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".activity.StudentCoursesActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

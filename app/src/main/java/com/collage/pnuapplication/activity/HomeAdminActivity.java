@@ -121,8 +121,8 @@ public class HomeAdminActivity extends AppCompatActivity  implements NavigationV
         startActivity(new Intent(HomeAdminActivity.this, VoteResultActivity.class));
     }
 
-    public void suggestAction(View view) {
-        //startActivity(new Intent(HomeAdminActivity.this, SuggestActivity.class));
+    public void suggestions(View view) {
+       startActivity(new Intent(HomeAdminActivity.this, SuggesionsActivity.class));
     }
 
     public void attendance(View view) {

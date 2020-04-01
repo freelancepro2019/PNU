@@ -22,6 +22,7 @@ public class Tags {
     public static final String table_course ="Course";
     public static final String table_attendance ="Attendance";
     public static final String table_about ="About";
+    public static final String table_setting ="Setting";
     public static final String category_club ="1";
     public static final String category_collage ="2";
 
